@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+{% load static %}
+{% include 'base/message.html' %}
+{% comment %}
+<div class="w-layout-grid brix---grid-3-columns-3">
+<div class="container">
+  <h3>Edit Copy View</h3> 
+  <br>
+  <h4>{{copy.bookID.title}}</h4>
+  <p>{{copy.bookID.author}}</p>
+  <p>{{copy.bookID.codeISBN}}</p>
+  <hr class="hr" />
+  <p>Copy ID: {{copy.id}}</p>
+  <p>Owner: {{copy.userID.last_name}}, {{copy.userID.first_name}}</p>
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Edit">
+  </form>
+</div>
+</div>
+{% endcomment %}
+<div class="main-section">
+  <div class="container-default w-container">
+    <div class="block-sticky-top---main-contain">
+      <div id="w-node-_5b7b5ab1-6d00-c7e0-62e6-f29490555c22-9a24b53f" class="dashboard-main-content---user-profiles">
+        <div id="cards" class="pd-top-24px---activities">
+          <div class="card component-card card-one-line">
+            <div class="w-form">
+
+
+              <form action="{% url 'mod:editCopy' copy.id%}" id="wf-form-signup" name="wf-form-signup" data-name="signup" method="post" enctype="multipart/form-data" data-ms-form="profile" class="container_profile-form-2" data-wf-page-id="66304d01b2d8ae4b9a24b53f" data-wf-element-id="42ebedb0-94f6-ae4e-e956-e07ffc90504a">
+                {% csrf_token %}
+                <h1 class="h1_small">Edit copy of {{copy.bookID.title}}</h1>
+                <div class="spacer_xs"></div>
+                <div>Use the form below to edit copy of {{copy.bookID.title}}. </div>
+                <div class="spacer_m"></div>             
+                <div class="input-wrapper"><label for="Author" class="input-label">Note</label><input class="input-2 w-input" maxlength="256" name="note" data-name="Author" placeholder="Unknow" type="text" id="Author" data-ms-member="last-name" value="{{copy.note}}" /></div>
+                <div class="flex-row_outer---custom">
+                  <div class="input-wrapper"><label for="Type" class="input-label">Status</label>
+                    <select id="Type" name="status" data-name="Type" data-ms-member="select" class="input-2 w-select">
+                      {% if copy.status == 0 %}
+                      <option value="0" selected>hidden</option>
+                      <option value="1">available</option>
+                      <option value="2">borrowed</option>
+                      <option value="3">unavailable</option>
+                      {% endif %}
+                      {% if copy.status == 1 %}
+                      <option value="0">hidden</option>
+                      <option value="1" selected>available</option>
+                      <option value="2">borrowed</option>
+                      <option value="3">unavailable</option>
+                      {% endif %}
+                      {% if copy.status == 2 %}
+                      <option value="0">hidden</option>
+                      <option value="1">available</option>
+                      <option value="2" selected>borrowed</option>
+                      <option value="3">unavailable</option>
+                      {% endif %}
+                      {% if copy.status == 3 %}
+                      <option value="0">hidden</option>
+                      <option value="1">available</option>
+                      <option value="2">borrowed</option>
+                      <option value="3" selected>unavailable</option>
+                      {% endif %}
+                    </select></div>                  
+                </div>  
+                <div class="padding-button-block">
+                  <div class="submit-button-book"><input type="submit"  class="btn-primary---save w-button" value="Edit" /></div>
+                </div>
+                <input type="hidden" name="bookID" value="{{bookID}}" id="id_bookID"><input type="hidden" name="userID" value="{{copy.userID}}" id="id_userID"><input type="hidden" name="regDate" value="{{copy.regDate}}" id="id_regDate">
+              </form>
+    
+    
+    
+    
+   
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

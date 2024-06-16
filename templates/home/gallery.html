@@ -1,0 +1,214 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+{% include 'base/message.html' %}
+{% load static %}
+  <div class="brix---section-4">
+    <div class="brix---container-default-5 w-container" >
+      <div class="brix---inner-container-640px---center">
+        <div class="brix---text-center-3">
+          <div class="brix---color-neutral-809">
+            <h1 class="brix---heading-h1-size">Browse our amazing collection of books</h1>
+          </div>
+          <div class="brix---mg-bottom-40px-3">
+            <div class="brix---color-neutral-808">
+              <p class="brix---paragraph-default-5">Discover your next story among our shelves. Browse thousands of books across genres and eras. Your next adventure awaits!</p>
+              {% if request.user.role > 0 %}
+              <p class="brix---paragraph-default-5">If your book is not recognized, <a href="{% url 'mod:addBook' %}">add it now!</a></p>
+              {% else %}
+              <p class="brix---paragraph-default-5">If your book is not recognized, contact an admin to add it now.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <style>
+        .w-checkbox-input--inputType-custom.w--redirected-checked {
+            background-color: #3898ec;
+            background-image: url("{% static 'gallery/custom-checkbox-checkmark.589d534424.svg' %}");
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-color: #3898ec;
+        }
+    </style>
+
+
+
+    <div class="form-block-2 w-form">
+      <form action="{% url 'home:gallery' %}" id="email-form" name="email-form" method="get" data-wf-page-id="66585433712302d24ae55b9a" data-wf-element-id="85c93d83-b041-dcbc-9b08-13e044d497bb">
+          <div class="combo-filter-book">
+              <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block;">
+                  <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                  <input value="liteCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                  <span for="category" class="checkbox-label w-form-label">Literature</span>
+              </label>
+              <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                  <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                  <input value="socieCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                  <span for="category" class="checkbox-label w-form-label">Social Science</span>
+              </label>
+              <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                  <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                  <input value="naturCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                  <span for="category" class="checkbox-label w-form-label">Nature</span>
+              </label>
+              <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                  <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                  <input value="techCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                  <span for="category" class="checkbox-label w-form-label">Technology</span>
+              </label>
+          </div>
+          <div class="combo-filter-book">
+              <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                  <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                  <input value="poliCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                  <span for="category" class="checkbox-label w-form-label">Political</span>
+              </label>
+              <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                  <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                  <input value="romanCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                  <span for="category" class="checkbox-label w-form-label">Romantic</span>
+              </label>
+              <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                  <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                  <input value="enterCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                  <span for="category" class="checkbox-label w-form-label">Entertainment</span>
+              </label>
+              <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                  <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                  <input value="otherCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                  <span for="category" class="checkbox-label w-form-label">Others</span>
+              </label>
+          </div>
+          <div class="brix---mg-bottom-16px-7 w-form" style="margin-top: 20px;">
+              <div class="brix---position-relative-2">
+                  <input class="search-box w-input" maxlength="256" name="book_search" data-name="Search Box" placeholder="Search book title, author and more..." type="text" id="Search-Box" />
+                  <button type="submit" class="brix---btn-circle-secondary-small w-inline-block">
+                    <img alt="Search - Elements Webflow Library - BRIX Templates" src="{% static 'gallery/line-rounded-search-dark-brix-templates.svg' %}" />
+                </button>
+                
+              </div>
+          </div>
+      </form>
+  </div>
+  
+
+      <br><br><br>
+      
+
+      <div class="w-layout-grid brix---grid-3-columns-3" style="padding-bottom: 30px;">
+        
+        {% for book in books %}
+        <a id="w-node-_8d38f56c-7f89-ee87-4c5a-740504701bb3-4ae55b9a" href="{% url 'home:book' book.id%}" class="brix---product-card-wrapper-v1 w-inline-block" style="max-width: 35vw; margin: auto;">
+          <div class="brix---product-card-image-inside-card">          
+            {% if book.coverImage %}          
+              {% if book.manual == True  %} 
+              <img src="{{ book.coverImage.url }}" alt="" class="brix---product-card-image" />   
+              {% else %}   
+              <img src="{{ book.coverImage }}" alt="" class="brix---product-card-image" />   
+              {% endif %}                 
+            {% else %}            
+              <img src="/media/book/defaultCover.jpg" alt="" class="brix---product-card-image" />
+            {% endif %}     
+          </div>
+          <div class="brix---product-card-content" style="padding: 5px">
+            <div class="brix---mg-bottom-16px-5">
+              <div class="brix---color-neutral-809---book-name">
+                <div class="text-100---book-name bold color-neutral-800">{{book.title}}</div>
+              </div>
+            </div>
+            <div class="brix---mg-bottom-24px-3">
+              <div class="brix---color-neutral-808---book-author">
+                <p class="brix---paragraph-default-5---book-author">{{book.author}}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+        
+        </div>
+
+
+
+
+
+        {% if books.has_other_pages %}
+        <div class="block-of-next---previous-button">
+          {% if books.has_previous %}
+            <div class="previous-button-block" style="display: inline-block;">
+              <a href="?page={{ books.previous_page_number }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-primary w-inline-block">
+                <div class="flex-horizontal gap-column-4px">
+                  <div>Prev</div>
+                </div>
+              </a>
+            </div>
+          {% endif %}
+          
+          {% for i in books.paginator.page_range %}
+            {% if min <= books.number and books.number <= max and min <= i and i <= max %}
+                {% if books.number == i %}
+                <div class="one-button" style="display: inline-block;">
+                  <a href="?page={{ i }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-primary w-inline-block">
+                    <div class="flex-horizontal gap-column-4px">
+                      <div>{{ i }}</div>
+                    </div>
+                  </a>
+                </div>
+                {% else %}
+                <div class="second-button" style="display: inline-block;">
+                  <a href="?page={{ i }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-secondary w-inline-block">
+                    <div class="flex-horizontal gap-column-4px">
+                      <div>{{ i }}</div>
+                    </div>
+                  </a>
+                </div>
+                {% endif %}
+            {% else %}
+
+
+              {% if books.number == i %}
+                <div class="one-button" style="display: inline-block;">
+                  <a href="?page={{ i }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-primary w-inline-block">
+                    <div class="flex-horizontal gap-column-4px">
+                      <div>{{ i }}</div>
+                    </div>
+                  </a>
+                </div>
+              {% else %}
+                {% with sum_books_number=books.number|add:4 %}
+                {% if i >= books.number and i <= sum_books_number%}
+                <div class="second-button" style="display: inline-block;">
+                  <a href="?page={{ i }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-secondary w-inline-block">
+                    <div class="flex-horizontal gap-column-4px">
+                      <div>{{ i }}</div>
+                    </div>
+                  </a>
+                </div>
+                {% endif %}
+                {% endwith %}
+              {% endif %}
+
+
+            {% endif %}
+            {% endfor %}
+        
+            {% if books.has_next %}
+              <div class="next-button-block" style="display: inline-block;">
+                <a href="?page={{ books.next_page_number }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-primary w-inline-block">
+                  <div class="flex-horizontal gap-column-4px">
+                    <div>Next</div>
+                  </div>
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      
+
+      
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/message.html' %}
+<div class="main-section---user-profile">
+  <div class="container-default w-container">
+    <div class="block-sticky-top---main-contain">
+      <div id="w-node-_5b7b5ab1-6d00-c7e0-62e6-f29490555c22-9354fc9f"
+        class="dashboard-main-content---user-profiles">
+        <div id="cards" data-w-id="c25945b2-b467-1640-757f-35242a0cbdb5" style="opacity: 1; max-width: 100vw;"
+          class="pd-top-24px---activities">
+          <h2 class="text-500 bold mg-bottom-12px">User Profiles</h2>
+          <div class="div-block-91" style="width: 98%">
+            <div class="div-block-81">
+              {% if ownerSocialAccount %}
+              <img class="image-14" alt="John Carter - Dashly X Webflow Template"
+                loading="eager"
+                src="{{ ownerSocialAccount.get_avatar_url }}">
+              {% else %}
+                {% if owner.avatar %}
+                <img class="image-14" alt="John Carter - Dashly X Webflow Template"
+                loading="eager"
+                src="/media/{{ owner.avatar }}">
+                
+                {% else %}
+                <img class="image-14" alt="John Carter - Dashly X Webflow Template"
+                loading="eager"
+                src="/media/user/defaultAvatar.jpg">
+                {% endif %}
+              {% endif %}
+              <p class="paragraph-62">{{owner.first_name}} {{owner.last_name}}</p>
+              {% if owner.role == 0%}
+              <p class="paragraph-63">Role: user</p>
+              {% else %}
+                {% if owner.role == 1%}
+                <p class="paragraph-63">Role: moderator</p>
+                {% else %}
+                <p class="paragraph-63">Role: admin</p>
+                {% endif %}
+              {% endif %}
+            </div>
+            <div>
+              <div class="div-block-88">
+                <div class="div-block-87">
+                  <p class="paragraph-67">Email Address</p>
+                </div>
+                <div class="flex-48">
+                  <p class="p-flex-item-48">✉ </p><a
+                    href="https://final-teamplate.webflow.io/user/user-view-profile#"
+                    class="a-flex-item-6 w-inline-block">
+                    <p class="paragraph-68">{{owner.email}} </p>
+                  </a>
+                </div>
+              </div>
+              <div class="div-block-82"></div>
+              <div class="div-block-83">
+                <p class="paragraph-64">Activity</p>
+              </div>
+              <div class="flex-46">
+                <p class="p-flex-item-45">🟢</p>
+                <p class="p-flex-item-46">Last active: {{date_active}}<br></p>
+              </div>
+              <div class="flex-46">
+                <p class="p-flex-item-45">🌐</p>
+                <p class="p-flex-item-46">Date joined:&nbsp;{{date_join}}<br></p>
+              </div>
+              {% if request.user.role == 0 %}
+              <div class="become-a-book-mod-block"><a data-w-id="dc3b625c-4a68-4ebe-9b74-d3193fa9f32f"
+                  href="{% url 'mod:modApply' %}"
+                  class="btn-primary w-inline-block">
+                  <div class="flex-horizontal gap-column-4px">
+                    <div>Become a book mod</div>
+                  </div>
+                </a></div>
+              {% endif %}
+            </div>
+          </div>
+          
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

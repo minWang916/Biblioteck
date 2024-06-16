@@ -1,0 +1,59 @@
+<div class="shelfItemContainer">
+  <div class="bookContainer">
+    <div class="leftColumn">
+      <a href="{% url 'home:book' item.0.bookID.id %}">
+        {% if item.0.bookID.coverImage %}
+        <img  src="/media/{{ item.0.bookID.coverImage }}" 
+        width="80px" height="100px" alt="image" style="object-fit: cover;">
+        {% else %}
+        <img class="rounded-circle" src="/media/book/defaultCover.png" width="150px" alt="image">
+        {% endif %}
+      </a>
+    </div>
+    <div class="rightColumn p-2">
+      <p>
+        ID: {{item.0.bookID.id}}
+        <span class="float-right m-1">
+          <a href="#extension_{{item.0.bookID.id}}" data-toggle="collapse" aria-controls="extension_{{item.0.bookID.id}}">
+          Show {{item.count}} copies <i class="fa-solid fa-bars"></i>
+          </a>
+        </span>
+        <span class="badge badge-success float-right m-1">{{ item.0.bookID.language }}</span>
+        <span class="badge badge-warning float-right m-1">{{ item.0.bookID.get_type_display }}</span>
+        {% if item.0.bookID.pdfFile %}
+        <span class="badge badge-info float-right m-1">E-book</span>
+        {% endif %}
+      </p>
+      <h5><a href="{% url 'home:book' item.0.bookID.id%}">{{item.0.bookID.title}}</a></h5>
+      <p>{{item.0.bookID.author}}
+      <span style="float: right">
+      {% if item.0.bookID.publisher and item.0.bookID.publication %}
+        {{item.0.bookID.publisher}}@{{item.0.bookID.publication}}
+      {% else %}
+        {% if item.0.bookID.publisher %}
+          {{item.0.bookID.publisher}}
+        {% else %}
+          {{item.0.bookID.publication}}
+        {% endif %}
+      {% endif %}
+      </span>
+      </p>
+    </div>
+  </div>
+  <div class="collapse" id="extension_{{item.0.bookID.id}}" style="width: 100%;">
+    {% for copy in item %}
+      <div class="copyContainer">
+        <p>
+          {% if copy.userID == request.user %}
+          <span class="float-right"><a href="{% url 'mod:editCopy' copy.id %}">Edit Copy</a></span>
+          {% endif %}
+          <span class="badge badge-success float-left">{{ copy.get_status_display }}</span>
+          <i class="m-3">Copy ID: {{ copy.id }}</i>
+        </p>
+        <p>
+          {{copy.note}}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+</div>

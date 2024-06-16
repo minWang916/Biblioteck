@@ -1,0 +1,9 @@
+{% if user.avatar %}
+  <img src="/media/{{ user.avatar }}" width=20px height="20px" alt="avatar" class="rounded-circle">
+{% else %}
+  {% if socialAccount %}
+  <img src="{{ socialAccount.get_avatar_url }}" width=20px height="20px" alt="avatar" class="rounded-circle">
+  {% else %}
+  <img src="/media/user/defaultAvatar.jpg"width=20px height="20px" alt="avatar" class="rounded-circle">
+  {% endif %}
+{% endif %}

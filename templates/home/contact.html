@@ -1,0 +1,59 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% load static %}
+
+{% block content %}
+{% include 'base/message.html' %}
+
+    <div class="main-section---user-profile">
+      <div class="container-default w-container">
+        <div class="brix---section-position-relative">
+          <div class="brix---container-default-14 w-container">
+            <div class="brix---inner-container-752px-center">
+              
+                <div class="brix---subtitle-6" style="text-align: center;">Contact us</div>
+                <div class="brix---color-neutral-827">
+                  <h1 class="brix---heading-h1-size-5" style="text-align: center;">Get in touch today</h1>
+                </div>
+                <div class="brix---mg-bottom-40px-10">
+                  <div class="brix---color-neutral-826">
+                    <p class="brix---paragraph-default-12" style="text-align: center;">Please free feel to fill this form to ask us if you have any questions!</p>
+                  </div>
+                </div>
+              
+              <div>
+                
+                  <div class="brix---card-form-v2 w-form">
+                    <form id="wf-form-BRIX---Contact-V2" name="wf-form-BRIX---Contact-V2" data-name="BRIX - Contact V2" method="get" data-wf-page-id="665da0c8491e5c5604cd8e08" data-wf-element-id="5f345ade-b1ef-f497-a271-e5d76a5cf058">
+                      <div class="w-layout-grid brix---form-grid-2-columns">
+                        <div><label for="BRIX-Contact-Name-V2" class="brix---input-label">Name</label><input class="brix---input-2 w-input" maxlength="256" name="BRIX---Contact-Name---V2" data-name="BRIX - Contact Name - V2" placeholder="John Carter" type="text" id="BRIX-Contact-Name-V2" required/></div>
+                        <div><label for="BRIX-Contact-Email-V2" class="brix---input-label">Email</label><input class="brix---input-2 w-input" maxlength="256" name="BRIX---Contact-Email---V2" data-name="BRIX - Contact Email - V2" placeholder="example@email.com" type="email" id="BRIX-Contact-Email-V2" required/></div>
+                        <div><label for="BRIX-Contact-Phone-V2" class="brix---input-label">Phone</label><input class="brix---input-2 w-input" maxlength="256" name="BRIX---Contact-Phone---V2" data-name="BRIX - Contact Phone - V2" placeholder="(123) 456 - 789" type="tel" id="BRIX-Contact-Phone-V2" required/></div>
+                        <div id="w-node-_5f345ade-b1ef-f497-a271-e5d76a5cf06a-04cd8e08"><label for="BRIX-Contact-Message-V2" class="brix---input-label">Leave us a message</label><textarea id="BRIX-Contact-Message-V2" name="BRIX---Contact-Message---V2" maxlength="5000" data-name="BRIX - Contact Message - V2" placeholder="Please type your message here..." class="brix---text-area w-input" required></textarea></div>
+                      </div>
+                      <div id="w-node-d10a393e-4b04-b8ea-e872-4f7a76271035-04cd8e08" class="block-send-messsage"><input type="submit" data-wait="Please wait..." id="w-node-_5f345ade-b1ef-f497-a271-e5d76a5cf06e-04cd8e08" class="brix---btn-primary-8 w-button" value="Send Message" /></div>
+                    </form>
+                    <div class="brix---success-message-2 w-form-done">
+                      <div><img src="{% static 'contact/images/line-rounded-check-circle-white-brix-templates.svg' %}" alt="Check - Elements Webflow Library - BRIX Templates" class="brix---icon-success-message-big" />
+                        <h3 class="brix---color-neutral-828">Thank you</h3>
+                        <div>Thanks for reaching out. We will get back to you soon.</div>
+                      </div>
+                    </div>
+                    <div class="brix---error-message-4 w-form-fail">
+                      <div>Oops! Something went wrong while submitting the form.</div>
+                    </div>
+                  </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="brix---half-bg-bottom"></div>
+        </div>
+      </div>
+    </div>    
+    <br><br>
+
+{% endblock %}

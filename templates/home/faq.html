@@ -1,0 +1,31 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% load static %}
+
+{% block content %}
+{% include 'base/message.html' %}
+<div class="container" style="width: 80vw; margin: 50px auto;">
+  <h2 class="title hero-v4 text-span">Frequently Asked Questions</h2>
+
+  <h3 class="brix---accordion-title">What is biblioteck?</h3>
+
+  <p class="brix---paragraph-default-11">Biblioteck is a platform for borrowing and lending books, where users can sign up to either borrow books from others or share their own books with fellow users.</p>
+
+  <h3 class="brix---accordion-title">Who can use Biblioteck?</h3>
+
+  <p class="brix---paragraph-default-11">
+    We welcome all kinds of users, from students to official libraries. You can also apply to become a moderator, allowing you to lend your books to other members of the Biblioteck community.</p>
+
+  <h3 class="brix---accordion-title">How long can I borrow a book from Biblioteck?</h3>
+
+  <p class="brix---paragraph-default-11">You will first make a borrow request. Once the provider of that book approve, your borrowing will due by the next 14 days from then on. Please make sure to return the book after you finish reading.</p>
+
+  <h3 class="brix---accordion-title">What do I need to become a book moderator?</h3>
+
+  <p class="brix---paragraph-default-11">You need to provide your name or your organizational name and also your phone number and address. These information will be used for your borrowers to pick up their request books. Please make sure to provide a valid phone number and address.</p>
+</div>          
+
+{% endblock %}

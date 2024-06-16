@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+{% include 'base/message.html' %}
+{% load static %}
+
+<div class="container">
+  <h3>Mod Application Review View</h3>
+  {% include "control/menu.html" %}
+  <hr>
+  {% for application in applications %}
+    {% if application.status == 0 %}
+    <div class="person-info m-2" style="border: solid 2px black;">
+      <p>
+        Applicant #{{application.applicant.id}}: {{application.applicant.username}}
+        <span class="float-right">{{application.applicant.email}}</span>
+      </p>
+
+      {% if application.applicantDocument %}
+      <p> <a href="/media/{{ application.applicantDocument }}" download>Download application file</a> </p>
+      {% endif %}
+      
+      <div>
+        {{ application.applicantText }}
+      </div>
+
+      <form class="m-2" action="{% url 'control:modDecide' 'approve' application.id %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Approve">
+      </form>
+      <form class="m-2" action="{% url 'control:modDecide' 'decline' application.id %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Decline">
+      </form>
+    </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,221 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% load static %}
+{% include 'base/message.html' %}
+<link href="{% static 'book/final-teamplate.webflow.6f28bf78a.css' %}"  rel="stylesheet" type="text/css" />
+
+     <div class="main-section---user-profile">
+        <div class="container-default w-container">
+          <div class="block-sticky-top---main-contain---single-book">
+            <div class="w-layout-grid brix---grid-2-columns-gap-column-80px">
+              <div id="w-node-_5a17ac72-1850-1981-dc72-26f836fd84b8-7467042b" class="single-book---book-cover">
+                <div class="brix---mg-bottom-32px-3">
+                  <div class="brix---image-wrapper-br-24px-shadow">
+    
+                    
+
+                    {% if book.coverImage %}          
+                      {% if book.manual == True  %} 
+                      <img src="{{ book.coverImage.url }}" alt="" class="brix---book-cover" />
+                
+                      {% else %}   
+                      <img src="{{ book.coverImage }}" alt="" class="brix---book-cover" />
+                
+                      {% endif %}                 
+                    {% else %}   
+                    <img src="/media/book/defaultCover.jpg" alt="" class="brix---book-cover" />         
+       
+                    {% endif %}  
+
+                  </div>
+                </div>
+              </div>
+              <div id="w-node-_743cabc5-f3ec-dfd2-c79f-f1cd26c67777-7467042b" class="div-block-100">
+                <div class="brix---mg-bottom-8px-4">
+                  <div class="brix---color-neutral-816">
+                    <h3 class="single-book---book-title">{{book.title}}</h3>
+                  </div>
+                </div>
+                <div class="brix---mg-bottom-40px-6">
+                  <div class="brix---color-neutral-815">
+                    <p class="single-book---author"><strong>Author</strong>: {{ book.author }}</p>
+                    <p class="single-book---author"><strong>Publisher</strong>: {{ book.publisher }}</p>
+                    <p class="single-book---publish-year"><strong>Publication</strong>: {{ book.publication }}</p>
+                    <p class="single-book---author"><strong>Language</strong>: {{ book.language }}</p>
+                    <p class="single-book---provider">
+                        <strong>Provider</strong>: 
+                        <span id="selectedProvider">
+                            <a href="#">{{ providers.0.userID__first_name }}</a> 
+                            ({{ providers.0.amount_copies }} copies available)
+                        </span>
+                        <button class="toggle-button" onclick="toggleDropdown()">▼</button>
+                        <div id="providerDropdown" class="dropdown-content">
+                            {% for provider in providers %}
+                                <a href="#" style = "margin-left: 80px;"
+                                   onclick="selectProvider('{{ provider.userID__first_name }}', '{{ provider.amount_copies }}', '{{ provider.userID__id }}', '{{ provider.userID__address }}')">
+                                   {{ provider.userID__first_name }} ({{ provider.amount_copies }} copies)
+                                </a>
+                                <br>
+                            {% endfor %}
+                        </div>
+                    </p>
+                    <p class="single-book---author"><strong>Location</strong>: <span id="providerLocation">{{ providers.0.userID__address }}</span></p>
+                    <p class="single-book---description"><strong>Description</strong>: {{ book.description }}</p>
+                  </div>
+                
+                <script>
+                    function toggleDropdown() {
+                        var dropdown = document.getElementById("providerDropdown");
+                        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+                    }
+                
+                    function selectProvider(name, amountCopies, id, location) {
+                        // Update provider name and copies available
+                        var selectedProvider = document.getElementById("selectedProvider");
+                        selectedProvider.innerHTML = '<a href="/home/shelf/' + id + '">' + name + '</a> (' + amountCopies + ' copies available)';
+                
+                        // Update provider location
+                        var providerLocation = document.getElementById("providerLocation");
+                        providerLocation.textContent = location;
+
+                        var modIdInput = document.getElementById("modId");
+                        modIdInput.value = id;
+                
+                        // Hide the dropdown
+                        toggleDropdown();
+                    }
+                </script>
+                
+                  <div class="button-container" style="padding-top: 2vw;">
+                    <form method="post" action="{% url 'home:borrow' book.id%}" style="display: inline-block;">
+                      {% csrf_token %}
+                          <div class="block-of-check-out-button" >
+                            <input type="hidden" name="book_id" value="{{book.id}}">
+                          <input type="hidden" name="mod_id" id="modId" value="{{ providers.0.userID__id }}">
+                        <button class="brix---btn-primary-6 w-button" >Check Out</button>
+                      </div>
+                    </form>
+                    {% if request.user.role > 0 %}
+                    <a href="{% url 'mod:editBook' book.id %}" style="color: white;"><button class="brix---btn-primary-6 w-button" style="float: right; width: 80px; text-align: center; margin-left: 3px; padding-left: 5px; padding-right: 5px;">
+                      <i class="fas fa-edit"></i>
+                    </button></a>
+                    <a href="{% url 'mod:addCopy' book.id %}" style="color: white;"><button class="brix---btn-primary-6 w-button" style="float: right; width: 80px; text-align: center; margin-left: 3px; padding-left: 5px; padding-right: 5px;">
+                      <i class="fa-solid fa-plus"></i>
+                    </button></a>
+                    {% endif %}
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <h2 class="text-500 bold mg-bottom-12px">Comments</h2>
+          <div class="feedback-submission-form-block---brix w-form">
+            <style>
+              .rating {
+                margin-top: 10px; /* Reduced space between "Rating" and stars */
+                margin-bottom: 30px; /* Increased space between stars and text area */
+                border: none;
+                float: left;
+              }
+              
+              .rating > label {
+                color: #90A0A3;
+                float: right;
+              }
+              
+              .rating > label:before {
+                margin: 5px;
+                font-size: 2em;
+                font-family: FontAwesome;
+                content: "\f005";
+                display: inline-block;
+              }
+              
+              .rating > input {
+                display: none;
+              }
+              
+              .rating > input:checked ~ label,
+              .rating:not(:checked) > label:hover,
+              .rating:not(:checked) > label:hover ~ label {
+                color: #F79426;
+              }
+              
+              .rating > input:checked + label:hover,
+              .rating > input:checked ~ label:hover,
+              .rating > label:hover ~ input:checked ~ label,
+              .rating > input:checked ~ label:hover ~ label {
+                color: #FECE31;
+              }
+            </style>
+            
+            
+            <form action="{% url 'home:book' book.id%}" id="wf-form-Feedback-Submission-Form-Block---Preview-Page" name="wf-form-Feedback-Submission-Form-Block---Preview-Page" data-name="Feedback Submission Form Block - Preview Page" method="post" class="feedback-submission-form---brix" data-wf-page-id="66594a63dd0674ef7467042b" data-wf-element-id="5604945f-401b-156c-35a5-b3ab59810b36">
+              {% csrf_token %}
+              <h3>Rating</h3>
+              <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+              </div>
+              <br>
+              <div class="text-area-div---brix">
+                <br>
+                <textarea placeholder="If you have any additional feedback, please type it in here..." maxlength="5000" id="Additional-Feedback-feedback-submission-form-preview" name="review" data-name="Additional Feedback" class="text-area---brix w-input" required></textarea>
+              </div>
+              <input type="submit" data-wait="Please wait..." class="submit-button-comment w-button" value="Comment" />
+            </form>
+          </div>
+          <div class="divider"></div>
+          <h2 class="text-500 bold mg-bottom-12px">Reviews </h2>
+        </div>
+      </div>
+      <div class="brix---container-default-3---single-book w-container">
+        <div class="sliding-box---single-book">
+          <div data-delay="4000" data-animation="slide" class="brix---slider-wrapper-4 w-slider" data-autoplay="false" data-easing="ease" style="opacity: 1;" data-hide-arrows="true" data-disable-swipe="false" data-w-id="d4fa5326-9a6c-d9a9-68c9-cfe1cbacfc8c" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true" role="region" aria-label="carousel">
+            <div class="brix---slider-mask-width-390px w-slider-mask" id="w-slider-mask-0">
+			{% if book.reviews.all %}
+        {% for review in book.reviews.all reversed %}
+          <div class="brix---slide-item-mg-2---5-stars w-slide" aria-label="1 of 5" role="group" aria-hidden="true" style="transform: translateX(-836px); opacity: 1; transition: transform 500ms ease 0s;">
+            <div class="brix---card-testimonial-v13-2" aria-hidden="true"><img src="/static/book/template_{{review.rating}}stars.svg" alt="" class="brix---mg-bottom-24px-2" aria-hidden="true">
+              <div class="brix---flex-horizontal" aria-hidden="true">
+                <div aria-hidden="true">
+                  <div class="brix---mg-bottom-8px-6" aria-hidden="true">
+                    <div class="brix---color-neutral-830" aria-hidden="true">
+                      <h3 class="brix---heading-h4-size" aria-hidden="true">
+                        <a style="text-decoration: none;" href="{% url 'user:wall' review.userID.id %}">{{ review.userID }}</a>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <i>{{review.created_at}}</i>
+              <div class="brix---mg-bottom-24px-2" aria-hidden="true">
+                <div class="brix---color-neutral-829" aria-hidden="true">
+                  <p class="brix---paragraph-default-13" aria-hidden="true">{{ review.review }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p style="white-space: wrap;">There are no reviews at the moment. Be the first one to review!!!</p>
+      {% endif %}
+			  
+      <div aria-live="polite" aria-atomic="true" class="w-slider-aria-label" data-wf-ignore="">Slide 3 of 5.</div></div>
+      <div class="brix---btn-slider-arrow-left---testimonial-v12-2 w-slider-arrow-left" role="button" tabindex="0" aria-controls="w-slider-mask-0" aria-label="previous slide" style=""><img src="{% static 'book/663073a16383e5d5e16de847_left-arrow-line-icon-elements-brix-templates.svg' %}" loading="lazy" alt="Icon - Elements Webflow Library - BRIX Templates"></div>
+      <div class="brix---btn-slider-arrow-right---testimonial-v12-2 w-slider-arrow-right" role="button" tabindex="0" aria-controls="w-slider-mask-0" aria-label="next slide"><img src="{% static 'book/663073a16383e5d5e16de8d9_right-arrow-line-icon-elements-brix-templates.svg' %}" loading="lazy" alt="Icon - Elements Webflow Library - BRIX Templates"></div>
+      <div class="brix---hidden-desktop w-slider-nav w-round"><div class="w-slider-dot" data-wf-ignore="" aria-label="Show slide 1 of 5" aria-pressed="false" role="button" tabindex="-1" style="margin-left: 3px; margin-right: 3px;"></div><div class="w-slider-dot" data-wf-ignore="" aria-label="Show slide 2 of 5" aria-pressed="false" role="button" tabindex="-1" style="margin-left: 3px; margin-right: 3px;"></div><div class="w-slider-dot w-active" data-wf-ignore="" aria-label="Show slide 3 of 5" aria-pressed="true" role="button" tabindex="0" style="margin-left: 3px; margin-right: 3px;"></div><div class="w-slider-dot" data-wf-ignore="" aria-label="Show slide 4 of 5" aria-pressed="false" role="button" tabindex="-1" style="margin-left: 3px; margin-right: 3px;"></div><div class="w-slider-dot" data-wf-ignore="" aria-label="Show slide 5 of 5" aria-pressed="false" role="button" tabindex="-1" style="margin-left: 3px; margin-right: 3px;"></div></div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

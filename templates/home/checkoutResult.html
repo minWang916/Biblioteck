@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+{% load static %}
+{% include 'base/message.html' %}
+
+
+<link href="{% static 'result/webflow-style.css' %}"  rel="stylesheet" type="text/css" />
+
+
+
+<div class="dashboard-content utility-page-content">
+    <div class="dashboard-main-content utility-page-main-content">
+      <div class="block-thank-you">
+        <div class="container-default---thank-you w-container">
+          <div class="card---thank-you amount-over-graph---thank-you">
+            <div class="title-container---brix---checkout">
+              <h2 class="heading-2---checkout">Thank you for your borrowing!</h2>
+              <div class="brix---mg-bottom-16px-11---thank-you"><a href="#" class="brix---avatar-circle-8 w-inline-block"><img src="{% static 'result/thank-20you.svg' %}" alt="" class="brix---avatar-image-link-3" /></a></div>
+            </div>
+            <div class="inner-container _326px center">
+              <p class="mg-bottom-24px---thank-you">We will notify you by email when your borrow request is accepted by a provider!</p>
+            </div>
+            <div class="flex-horizontal"><a data-w-id="dc3b625c-4a68-4ebe-9b74-d3193fa9f32f" href="{% url 'home:gallery' %}" class="btn-primary w-inline-block">
+                <div class="flex-horizontal gap-column-4px">
+                  <div>Back to home</div>
+                </div>
+              </a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

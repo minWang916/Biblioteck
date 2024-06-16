@@ -1,0 +1,297 @@
+{% extends 'base/base.html' %}
+{% block content %}
+  {% load static %}
+  {% include 'base/message.html' %}
+
+  
+
+      <div class="container-default---login w-container">
+        <div data-w-id="bffbe75b-d95c-3992-bdd3-befc9d0bd453" style="opacity: 1;" class="mg-bottom-48px---login">
+          <div class="sign-in-form-block---brix w-form">
+            <style>
+              .input-valid {
+                border: 2px solid green;
+              }
+              .input-invalid {
+                border: 2px solid red;
+              }
+              .condition-valid {
+                color: green;
+              }
+              .condition-invalid {
+                color: red;
+              }
+              .disabled-button {
+                background-color: grey;
+                cursor: not-allowed;
+              }
+            </style>
+            <div id="usernames" style="display: none;">
+              {% for username in usernames %}
+                <p class="username">{{ username }}</p>
+              {% endfor %}
+            </div>
+            <div id="emails" style="display: none;">
+              {% for email in emails %}
+                <p class="email">{{ email }}</p>
+              {% endfor %}
+            </div>
+
+            <form action="{% url 'user:register' %}" id="wf-form-Sign-in-V1" name="wf-form-Sign-in-V1" method="post" class="sign-in-form-v1---brix" aria-label="Sign in V1">
+              {% csrf_token %}
+              <div class="title-container---brix">
+                <h2 class="heading-2---sign-in">Sign Up</h2>
+                <p class="paragraph-52">Please fill your email and password to get started!</p>
+              </div>
+              <div class="flex-row_outer---sign-up">
+                <div class="input-div---brix---first-name">
+                  <input class="input---brix w-input" maxlength="256" name="firstname" placeholder="First name" type="text" id="First-Name" required="" />
+                </div>
+                <div class="input-div---brix">
+                  <input class="input---brix w-input" maxlength="256" name="lastname" placeholder="Last name" type="text" id="Last-name-2" required="" />
+                </div>
+              </div>
+              <div class="input-div---brix">
+                <input class="input---brix w-input" maxlength="256" name="Username" placeholder="Username" type="text" id="Username" required="" />
+                <p class="required-passwords text-100 medium" >
+                  <em>
+                    * Your username: <br />
+                    <span id="unique" class="condition-invalid">&nbsp;&nbsp;&nbsp;&nbsp;must be unique.</span><br />
+                    <span id="length" class="condition-invalid">&nbsp;&nbsp;&nbsp;&nbsp;has at least 8 characters.</span><br />
+                    <span id="valid-chars" class="condition-invalid">&nbsp;&nbsp;&nbsp;&nbsp;has letters (lower & uppercase) and numeric digits only.</span><br />
+                  </em>
+                </p>
+              </div>
+              <div class="input-div---brix">
+                <input class="input---brix w-input" maxlength="256" name="Email" placeholder="Email address" type="email" id="Email-sign-in-1-preview" required="" />
+                <p class="paragraph-verification-passwords text-100 medium">
+                  <em><span id="email2req" class="condition-invalid">&nbsp;&nbsp;&nbsp;&nbsp;* Your email must not be used by an existing account.</span></em>
+                </p>
+              </div>
+              <div class="input-div---brix">
+                <input class="input---brix w-input" maxlength="256" name="New-password" placeholder="New password" type="password" id="Password" required="" />
+                <p class="required-passwords text-100 medium">
+                  <em>
+                    * Your password: <br />
+                    <span id="lengthP" class="condition-invalid">&nbsp;&nbsp;&nbsp;&nbsp;has at least 8 characters.</span><br />
+                    <span id="valid-charsP" class="condition-invalid">&nbsp;&nbsp;&nbsp;&nbsp;has a combination of letters, numbers, and symbols.</span><br />
+                  </em>
+                </p>
+              </div>
+              <div class="input-div---brix">
+                <input class="input---brix w-input" maxlength="256" name="Repeat-new-password" placeholder="Repeat new password" type="password" id="Repeat-new-password-2" required="" />
+                <p class="paragraph-verification-passwords text-100 medium">
+                  <em><span id="Password2Req" class="condition-invalid">&nbsp;&nbsp;&nbsp;&nbsp;* Enter the same passwords as before, for verification.</span></em>
+                </p>
+              </div>
+              <a href="{% url 'user:login' %}" class="already-have-an-account---brix">Already have an account? Login</a>
+              <input type="submit" data-wait="Please wait..." class="log-in-button---brix w-button disabled-button" id="sign-up-button" value="Sign Up" disabled />
+            </form>
+
+            <script>
+              async function hashString(inputString) {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(inputString);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+                return hashHex;
+              }
+
+              var userOK = false
+              var passOK = false
+              var pass2OK = false
+              var firstNameOK = false
+              var lastnameOK = false
+              var emailOK = false
+              
+              function checkSignUpButton() {
+                const signUpButton = document.getElementById('sign-up-button')
+                if (userOK && passOK && pass2OK && firstNameOK && lastnameOK && emailOK) {
+                  signUpButton.disabled = false
+                  signUpButton.classList.remove('disabled-button')
+                } else {
+                  signUpButton.disabled = true
+                  signUpButton.classList.add('disabled-button')
+                }
+              }
+              
+              document.getElementById('First-Name').addEventListener('input', function () {
+                const firstnameInput = this
+                const firstname = firstnameInput.value
+                firstNameOK = firstname.length > 0
+              
+                if (firstNameOK) {
+                  firstnameInput.classList.remove('input-invalid')
+                  firstnameInput.classList.add('input-valid')
+                } else {
+                  firstnameInput.classList.remove('input-valid')
+                  firstnameInput.classList.add('input-invalid')
+                }
+              
+                checkSignUpButton()
+              })
+              
+              document.getElementById('Last-name-2').addEventListener('input', function () {
+                const lastnameInput = this
+                const lastname = lastnameInput.value
+                lastnameOK = lastname.length > 0
+              
+                if (lastnameOK) {
+                  lastnameInput.classList.remove('input-invalid')
+                  lastnameInput.classList.add('input-valid')
+                } else {
+                  lastnameInput.classList.remove('input-valid')
+                  lastnameInput.classList.add('input-invalid')
+                }
+              
+                checkSignUpButton()
+              })
+              
+              document.getElementById('Email-sign-in-1-preview').addEventListener('input', async function () {
+                const emailInput = this
+                const email = emailInput.value
+                const uniqueEmail = document.getElementById('email2req')
+              
+                const emailElements = document.querySelectorAll('#emails .email')
+                const emails = Array.from(emailElements).map((el) => el.textContent)
+
+                const hashedEmail = await hashString(email);
+                const isUnique = !emails.includes(hashedEmail);
+              
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                emailOK = emailRegex.test(email) && email.length > 0 && isUnique
+              
+                if (emailOK) {
+                  uniqueEmail.classList.remove('condition-invalid')
+                  uniqueEmail.classList.add('condition-valid')
+                  emailInput.classList.remove('input-invalid')
+                  emailInput.classList.add('input-valid')
+                } else {
+                  emailInput.classList.remove('input-valid')
+                  emailInput.classList.add('input-invalid')
+                  uniqueEmail.classList.remove('condition-valid')
+                  uniqueEmail.classList.add('condition-invalid')
+                }
+              
+                checkSignUpButton()
+              })
+              
+              document.getElementById('Username').addEventListener('input', async function () {
+                const usernameInput = this
+                const username = usernameInput.value
+                const unique = document.getElementById('unique')
+                const length = document.getElementById('length')
+                const validChars = document.getElementById('valid-chars')
+              
+                const usernameElements = document.querySelectorAll('#usernames .username')
+                const usernames = Array.from(usernameElements).map((el) => el.textContent)
+
+                const hashedUsername = await hashString(username)
+                const isUnique = !usernames.includes(hashedUsername)
+              
+                const validCharsRegex = /^[a-zA-Z0-9]*$/
+              
+                userOK = validCharsRegex.test(username) && username.length >= 8 && isUnique
+              
+                if (validCharsRegex.test(username) && username.length > 0) {
+                  validChars.classList.remove('condition-invalid')
+                  validChars.classList.add('condition-valid')
+                } else {
+                  validChars.classList.remove('condition-valid')
+                  validChars.classList.add('condition-invalid')
+                }
+              
+                if (username.length >= 8) {
+                  length.classList.remove('condition-invalid')
+                  length.classList.add('condition-valid')
+                } else {
+                  length.classList.remove('condition-valid')
+                  length.classList.add('condition-invalid')
+                }
+              
+                if (isUnique && username.length > 0) {
+                  unique.classList.remove('condition-invalid')
+                  unique.classList.add('condition-valid')
+                } else {
+                  unique.classList.remove('condition-valid')
+                  unique.classList.add('condition-invalid')
+                }
+              
+                if (userOK) {
+                  usernameInput.classList.remove('input-invalid')
+                  usernameInput.classList.add('input-valid')
+                } else {
+                  usernameInput.classList.remove('input-valid')
+                  usernameInput.classList.add('input-invalid')
+                }
+              
+                checkSignUpButton()
+              })
+              
+              document.getElementById('Password').addEventListener('input', function () {
+                const passwordInput = this
+                const password = passwordInput.value
+                const length = document.getElementById('lengthP')
+                const validChars = document.getElementById('valid-charsP')
+              
+                const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/
+              
+                passOK = password.length >= 8 && passwordRegex.test(password)
+              
+                if (passwordRegex.test(password)) {
+                  validChars.classList.remove('condition-invalid')
+                  validChars.classList.add('condition-valid')
+                } else {
+                  validChars.classList.remove('condition-valid')
+                  validChars.classList.add('condition-invalid')
+                }
+              
+                if (password.length >= 8) {
+                  length.classList.remove('condition-invalid')
+                  length.classList.add('condition-valid')
+                } else {
+                  length.classList.remove('condition-valid')
+                  length.classList.add('condition-invalid')
+                }
+              
+                if (passOK) {
+                  passwordInput.classList.remove('input-invalid')
+                  passwordInput.classList.add('input-valid')
+                } else {
+                  passwordInput.classList.remove('input-valid')
+                  passwordInput.classList.add('input-invalid')
+                }
+              
+                checkSignUpButton()
+              })
+              
+              document.getElementById('Repeat-new-password-2').addEventListener('input', function () {
+                const passwordInput2 = this
+                const password2 = passwordInput2.value
+                const passConfirm = document.getElementById('Password2Req')
+              
+                pass2OK = password2 === document.getElementById('Password').value
+              
+                if (pass2OK) {
+                  passConfirm.classList.remove('condition-invalid')
+                  passConfirm.classList.add('condition-valid')
+                  passwordInput2.classList.remove('input-invalid')
+                  passwordInput2.classList.add('input-valid')
+                } else {
+                  passConfirm.classList.remove('condition-valid')
+                  passConfirm.classList.add('condition-invalid')
+                  passwordInput2.classList.remove('input-valid')
+                  passwordInput2.classList.add('input-invalid')
+                }
+              
+                checkSignUpButton()
+              })
+              
+              document.addEventListener('DOMContentLoaded', checkSignUpButton)
+            </script>
+          </div>
+        </div>
+      </div>
+  
+{% endblock %}

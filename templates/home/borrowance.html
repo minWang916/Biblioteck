@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+{% load static %}
+<link href="{% static 'checkout/webflow-style.css' %}"  rel="stylesheet" type="text/css" />
+
+
+
+<div class="main-section---user-profile">
+    <div class="container-default w-container">
+      <div class="block-sticky-top---main-contain---book-checkout">
+        <div class="w-layout-grid brix---grid-2-columns-gap-column-80px">
+          <div id="w-node-_5a17ac72-1850-1981-dc72-26f836fd84b8-d655db8c" class="single-book---book-cover">
+            <div class="brix---mg-bottom-32px-3">
+              <div class="brix---image-wrapper-br-24px-shadow">
+                
+        
+
+                {% if book.coverImage %}          
+                      {% if book.manual == True  %} 
+                      <img src="{{ book.coverImage.url }}" alt="" class="brix---book-cover" />
+                
+                      {% else %}   
+                      <img src="{{ book.coverImage }}" alt="" class="brix---book-cover" />
+                
+                      {% endif %}                 
+                    {% else %}   
+                    <img src="/media/book/defaultCover.jpg" alt="" class="brix---book-cover" />         
+       
+                    {% endif %}  
+                  </div>
+            </div>
+          </div>
+          <div id="w-node-_743cabc5-f3ec-dfd2-c79f-f1cd26c67777-d655db8c" class="block-text-book-detail---borrow-checkout">
+            <div class="brix---mg-bottom-8px-4">
+              <div class="brix---color-neutral-816">
+                <div class="title-container---brix---checkout">
+                  <h2 class="heading-2---checkout">Checkout</h2>
+                  <p class="paragraph-52">Please check carefully your book checkout</p>
+                </div>
+                <h3 class="single-book---book-title">{{book.title}}</h3>
+              </div>
+            </div>
+            <div class="brix---mg-bottom-40px-6">
+              <div class="brix---color-neutral-815">
+                <p class="single-book---author"><strong>Borrower</strong>: {{request.user.first_name}}</p>
+                <p class="single-book---provider"><strong>Provider</strong>: {{mod.first_name}}</p>
+                <p class="single-book---author"><strong>Location</strong>: {{mod.address}}</p>
+                <p class="single-book---author"><strong>Available pick-up hour</strong>: {{mod.availableWorkingHours}}</p>
+              </div>
+              <br><br>
+      
+              <form method="post" action="{% url 'home:result' %}">
+                {% csrf_token %}
+                <div class="block-of-check-out-button---checkout">
+                  <input type="hidden" value="{{book.id}}" name="bookID">
+                  <input type="hidden" value="{{mod.id}}" name="modID">
+                  <button type="submit" class="brix---btn-primary-6 w-button">Borrow now</button>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

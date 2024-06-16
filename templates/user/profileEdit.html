@@ -1,0 +1,126 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+  .btn-secondary---upload-new-avatar {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+</style>
+<form action="{% url 'user:edit' %}" enctype="multipart/form-data" id="wf-form-signup" name="wf-form-signup" data-name="signup" method="post" data-ms-form="profile" class="container_profile-form-2" data-wf-page-id="6628cf5c13254dbc828fa890" data-wf-element-id="b9e108e9-0263-f841-ba73-fcf95b875e62" aria-label="signup">
+  {% csrf_token %}
+<div style="opacity: 1;" class="page-wrapper">
+  <div class="main-section" style = "margin: 0 auto;">
+    <div class="container-default w-container">
+      <div class="block-sticky-top---main-contain">
+        <div id="w-node-_5b7b5ab1-6d00-c7e0-62e6-f29490555c22-828fa890" class="dashboard-main-content---user-profiles">
+          <div id="cards" data-w-id="c25945b2-b467-1640-757f-35242a0cbdb5" style="opacity: 1;" class="pd-top-24px---activities">
+            <h2 class="text-500 bold mg-bottom-12px">Your profile info</h2>
+            <div class="card component-card card-one-line" style="max-width: 95vw">
+              <div class="block-of-avatar">
+                <div class="block-of-your-avatar">
+                  <div class="div-block-10">
+
+                    {% if socialAccount %}
+                    <img src="{{ socialAccount.get_avatar_url }}" loading="eager" sizes="(max-width: 1439px) 48px, 81px"  alt="Avatar - Dashflow X Webflow Template" class="avatar-circle _81px">
+                    {% else %}
+                      
+                      {% if user.avatar %}
+                      <img src="/media/{{ user.avatar }}" loading="eager" sizes="(max-width: 1439px) 48px, 81px"  alt="Avatar - Dashflow X Webflow Template" class="avatar-circle _81px">
+                     
+                      {% else %}
+                      <img src="/media/user/defaultAvatar.jpg" loading="eager" sizes="(max-width: 1439px) 48px, 81px"  alt="Avatar - Dashflow X Webflow Template" class="avatar-circle _81px">
+                      {% endif %}
+                    {% endif %}
+                    <div class="block-combo-your-avatar">
+                      <h1 class="h1_small-your-avatar">Your Avatar</h1>
+                      <div>Profile picture of any size!</div>
+                    </div>
+                  </div>
+                  {% comment %} <div data-w-id="0b4af8e5-0116-a75e-1b7c-69e354dadc56" class="save-avatar-button"><a data-w-id="5237d547-6605-a6a5-bc8b-bb8090bf390c" href="https://final-teamplate.webflow.io/user/user-change-profile#" class="btn-primary---save w-inline-block">
+                      <div class="flex-horizontal gap-column-4px">
+                        <div>Save Avatar</div>
+                      </div>
+                    </a></div> {% endcomment %}
+                    <div data-w-id="1de72452-8b8b-2823-d65d-ac9efe469afc" class="upload-new-avatar-button">
+                      <label for="id_avatar" class="btn-secondary---upload-new-avatar w-inline-block">
+                        <input type="file" enctype="multipart/form-data"  name="avatar" style="display: none;" accept="image/*" id="id_avatar">
+                        <div class="flex-horizontal gap-column-4px">
+                          <div class="text-size">
+                            <strong>Upload new avatar</strong>
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+
+                </div>
+                
+              </div>
+              <div id="general-form" general-form=".my-form {display:block !important;}" class="w-form">
+                
+                
+                  
+                 
+                  
+                  
+                  <div class="flex-row_outer">
+                    <div class="input-wrapper _15p-right"><label for="first_name" class="input-label">First Name</label><input class="input-2 w-input" maxlength="256" name="first_name" data-name="First Name 4" value="{{user.first_name}}" type="text" id="id_first_name" data-ms-member="first-name" placeholder="Your first name"></div>
+                    <div class="input-wrapper"><label for="last_name" class="input-label">Last Name</label><input class="input-2 w-input" maxlength="256" name="last_name" data-name="Last Name 4" value="{{user.last_name}}" placeholder="Your last name" type="text" id="id_last_name" data-ms-member="last-name" ></div>
+                  </div>
+      
+                  <div class="flex-row_outer">
+                    <div class="input-wrapper _15p-right"><label for="birthdate" class="input-label">Birthdate</label><input type="date" class="input-2 w-input" maxlength="256" name="birthdate" data-name="birthdate" id="id_birthdate" data-ms-member="first-name" value="{{birthdate}}"></div>
+                    {% if user.phoneNum != None %}
+                    <div class="input-wrapper"><label for="phoneNum" class="input-label">Phone Number</label><input class="input-2 w-input" maxlength="256" name="phoneNum" data-name="Phone Number" value="{{user.phoneNum}}" placeholder="Your phone number" type="text" id="id_phoneNum" data-ms-member="last-name" ></div>
+                    {% else %}
+                    <div class="input-wrapper"><label for="phoneNum" class="input-label">Phone Number</label><input class="input-2 w-input" maxlength="256" name="phoneNum" data-name="Phone Number"  placeholder="Your phone number" type="text" id="id_phoneNum" data-ms-member="last-name" ></div>
+                    {% endif %}
+                  </div>
+                  <div class="flex-row_outer">
+                    {% if user.address != None %}
+                    <div class="input-wrapper _15p-right"><label for="address" class="input-label">Address</label><input class="input-2 w-input" maxlength="256" name="address" data-name="Phone 2" value="{{user.address}}" placeholder="Your address" type="text" id="id_address" data-ms-member="phone"  ></div>
+                    {% else %}
+                    <div class="input-wrapper _15p-right"><label for="address" class="input-label">Address</label><input class="input-2 w-input" maxlength="256" name="address" data-name="Phone 2"  placeholder="Your address" type="text" id="id_address" data-ms-member="phone"  ></div>
+                    {% endif %}
+                    <div class="input-wrapper"><label for="gender" class="input-label">Gender</label><select id="id_gender" name="gender" data-name="Field 2" data-ms-member="select" class="input-2---gender w-select">
+                        {% if user.gender == 0 %}
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                        <option value="2">Others</option>
+                        {% else %}
+                          {% if user.gender == 1 %}
+                          <option value="1">Female</option>
+                          <option value="0">Male</option>
+                          <option value="2">Others</option>
+                          {% else %}
+                          <option value="2">Others</option>
+                          <option value="0">Male</option>
+                          <option value="1">Female</option>
+                          {% endif %}
+                        {% endif %}
+                      </select></div>
+                    </div>
+                  </div>
+                  
+              <div data-w-id="1b801390-716a-d15f-f79d-f9272e217625" class="block-save-profile-button">
+                <br>
+                <button data-w-id="40c92f68-ad9b-f6ff-b252-85434513c111" class="btn-primary---save w-button">Save changes</button>
+              </div>
+            
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+{% endblock %}

@@ -1,0 +1,33 @@
+header {
+  padding: 0px 15%;
+  padding-top: 30px;
+  padding-bottom: 5px;
+  text-align: center;
+  background-color: gray;
+}
+
+header h1 {
+  color: white;
+}
+
+header ul{
+  text-align-last: justify;
+  cursor: pointer;
+}
+
+header ul li{
+  display: inline-block;
+  margin: 0 auto;
+  padding: 0 auto;
+  color:white;
+}
+
+header a{
+  text-decoration: none;
+  color: inherit;
+}
+
+header ul li:hover{
+  color: black;
+  font-weight: bold;
+}

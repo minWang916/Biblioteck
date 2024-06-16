@@ -1,0 +1,182 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% include 'base/message.html' %}
+{% load i18n %}
+
+{% block meta %}
+<!-- NOTE(joshblum): This prevents leaking the password reset token via the
+   Referer header to any 3rd party apps on the page. -->
+<meta name="referrer" content="origin">
+{% endblock %}
+
+{% block title %}{% trans "Confirm password reset" %}{% endblock %}
+
+{% block content %}
+  {% if validlink %}
+<style>
+  .input-valid {
+    border: 2px solid green;
+  }
+  .input-invalid {
+    border: 2px solid red;
+  }
+  .condition-valid {
+    color: green;
+  }
+  .condition-invalid {
+    color: red;
+  }
+  .disabled-button {
+    background-color: grey !important;
+    cursor: not-allowed !important;
+  }
+</style>
+<div style="opacity: 1;" class="page-wrapper">
+  <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
+</div>
+<div class="main-section">
+  <div class="container-default w-container">
+    <div class="block-sticky-top---main-contain">
+      <div id="w-node-_5b7b5ab1-6d00-c7e0-62e6-f29490555c22-71edfef9" class="dashboard-main-content---user-profiles">
+        <div id="cards" data-w-id="c25945b2-b467-1640-757f-35242a0cbdb5" style="opacity: 1;" class="pd-top-24px---activities">
+          <h2 class="text-500 bold mg-bottom-12px">Change Password</h2>
+          <div class="card component-card card-one-line">
+            <div class="w-form">
+              
+              <form action="{% url 'user:recover_confirm' uidb64=uidb64 token=token %}" id="wf-form-signup" name="wf-form-signup" method="post" class="container_profile-form-2" aria-label="signup">
+                {% csrf_token %}
+                <div class="spacer_m"></div>
+                <div>Use this form to reset your password.</div>
+                <div class="spacer_m"></div>
+                
+                <div class="input-wrapper">
+                  <label for="new_password1" class="input-label">New password</label>
+                  <input class="input-2 w-input" maxlength="256" name="new_password1" placeholder="" type="text" id="new_password1" required />
+                </div>
+                <div class="input-wrapper">
+                  <label for="new_password2" class="input-label">Repeat new password</label>
+                  <input class="input-2 w-input" maxlength="256" name="new_password2" placeholder="" type="text" id="new_password2" required />
+                </div>
+                <div class="description">
+                  <em>
+                    * Your password: <br />
+                    <span id="lengthP" class="condition-invalid">&nbsp;&nbsp;&nbsp;&nbsp;has at least 8 characters.</span><br />
+                    <span id="valid-charsP" class="condition-invalid">&nbsp;&nbsp;&nbsp;&nbsp;has a combination of letters, numbers, and symbols.</span><br/>
+                    <span id="matchP" class="condition-invalid">&nbsp;&nbsp;&nbsp;&nbsp;matches the confirmation password.</span>
+                  </em>
+                </div>
+                <div class="spacer_m"></div>
+                <div class="block-button">
+                  <input type="submit" class="log-in-button---brix w-button disabled-button" id="change-password-button" value="Change Password" disabled>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var lengthOK = false;
+  var wordRegexOK = false;
+  var confirmation = false;
+
+  function checkChangePasswordButton() {
+      const changePasswordButton = document.getElementById('change-password-button');
+      if (lengthOK && wordRegexOK && confirmation) {
+          changePasswordButton.disabled = false;
+          changePasswordButton.classList.remove('disabled-button');
+      } else {
+          changePasswordButton.disabled = true;
+          changePasswordButton.classList.add('disabled-button');
+      }
+  }
+
+  document.getElementById('new_password1').addEventListener('input', function () {
+      const passwordInput = this.value;
+      const lengthP = document.getElementById('lengthP');
+      const validCharsP = document.getElementById('valid-charsP');
+
+      // Check length
+      if (passwordInput.length >= 8) {
+          lengthP.classList.remove('condition-invalid');
+          lengthP.classList.add('condition-valid');
+          lengthOK = true;
+      } else {
+          lengthP.classList.remove('condition-valid');
+          lengthP.classList.add('condition-invalid');
+          lengthOK = false;
+      }
+
+      // Check for valid characters
+      const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
+      if (regex.test(passwordInput)) {
+          validCharsP.classList.remove('condition-invalid');
+          validCharsP.classList.add('condition-valid');
+          wordRegexOK = true;
+      } else {
+          validCharsP.classList.remove('condition-valid');
+          validCharsP.classList.add('condition-invalid');
+          wordRegexOK = false;
+      }
+
+      checkChangePasswordButton();
+  });
+
+  document.getElementById('new_password2').addEventListener('input', function () {
+      const passwordInput = document.getElementById('new_password1').value;
+      const confirmationInput = this.value;
+      const matchP = document.getElementById('matchP');
+
+      // Check if passwords match
+      if (passwordInput === confirmationInput) {
+          matchP.classList.remove('condition-invalid');
+          matchP.classList.add('condition-valid');
+          confirmation = true;
+      } else {
+          matchP.classList.remove('condition-valid');
+          matchP.classList.add('condition-invalid');
+          confirmation = false;
+      }
+
+      checkChangePasswordButton();
+  });
+</script>
+{% comment %} <div class="container">
+  {% if validlink %}
+    <p>{% trans "Enter your new password below to reset your password:" %}</p>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="{% trans 'Set password' %}" />
+    </form>
+  {% else %}
+    Password reset unsuccessful. Please try again or contact an administrator.</a>
+  {% endif %}
+</div> {% endcomment %}
+  {% else %}
+  <div class="dashboard-content utility-page-content">
+    <div class="dashboard-main-content utility-page-main-content">
+      
+        <div class="container-default w-container">
+          <div data-w-id="619efe17469a19c94a600b1500000000000b" style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;" class="utility-page-content mg-bottom-0 w-form">
+            <div class="card _404"><img src="{% static 'user/recovery/404.svg' %}" loading="lazy" alt="" class="_404">
+              <h2 class="text-500 bold color-neutral-800">Oops! Page not found</h2>
+              <div class="inner-container _326px center">
+                <p class="mg-bottom-24px">The page you are looking for doesn't exist or has been moved</p>
+              </div>
+              <div class="flex-horizontal"><a data-w-id="dc3b625c-4a68-4ebe-9b74-d3193fa9f32f" href="{% url 'home:index' %}" class="btn-primary w-inline-block">
+                  <div class="flex-horizontal gap-column-4px">
+                    <div>Back to home</div>
+                  </div>
+                </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+<form method = "get" action = "{% url 'home:gallery' %}">
+  <fieldset>
+    <b>Categories:</b><br>
+    <label for="literature"><input type="checkbox" id="literature" name="category" value="liteCate"> Literature</label>
+    <label for="socieCate"><input type="checkbox" id="social_sciences" name="category" value="socieCate"> Social Sciences</label>
+    <label for="natural_sciences"><input type="checkbox" id="natural_sciences" name="category" value="naturCate"> Natural Sciences</label>
+    <label for="technology"><input type="checkbox" id="technology" name="category" value="techCate"> Technology</label>
+    <label for="politics"><input type="checkbox" id="politics" name="category" value="poliCate"> Politics</label>
+    <label for="romantic"><input type="checkbox" id="romantic" name="category" value="romanCate"> Romantic</label>
+    <label for="entertainment"><input type="checkbox" id="entertainment" name="category" value="enterCate"> Entertainment</label>
+    <label for="other"><input type="checkbox" id="other" name="category" value="otherCate"> Other</label><br>
+  </fieldset>
+  <hr>
+  <label for="search">Search by Name:</label>
+  <input type="text" id="search" name = "book_search">
+
+  <input class="button btn btn-primary float-right" type="submit" value="Search">
+</form>

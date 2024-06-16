@@ -1,0 +1,24 @@
+.galleryView{
+  width: 100%;
+  margin: 0 auto;
+}
+
+.bookContainer{
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 20px auto;
+  padding: 10px;
+  display: grid;
+}
+
+.leftColumn{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  /* border: 2px solid black; */
+}
+
+.rightColumn{
+  grid-column-start: 2;
+  grid-column-end: 4;
+  /* border: 2px solid black; */
+}

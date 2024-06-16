@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% load socialaccount %}
+{% load static %}
+{% include 'base/message.html' %}
+
+
+
+<div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
+          <div class="container-default---login w-container">
+            <div data-w-id="bffbe75b-d95c-3992-bdd3-befc9d0bd453" style="opacity: 1;" class="mg-bottom-48px---login">
+              <div class="sign-in-form-block---brix w-form">
+
+                {% for key, value in form.error.items %}
+                {{value}}
+                {% endfor %}
+
+
+                <form action = "{% url 'user:login' %}" id="wf-form-Sign-in-V1" name="wf-form-Sign-in-V1" data-name="Sign in V1" method="post" class="sign-in-form-v1---brix" data-wf-page-id="6635af3e5935deccf38319cc" data-wf-element-id="07381e2a-d17a-38e9-de5c-b7fc4244450c" aria-label="Sign in V1">       
+                  <div class="title-container---brix">
+                    <h2 class="heading-2---sign-in">Login</h2>
+                    <p class="paragraph-52">Please fill your email and password to login</p>
+                  </div>           
+                    {% csrf_token %}
+                  <div class="input-div---brix"><input class="input---brix name-icon---brix w-input" maxlength="256" name="username" data-name="Username" placeholder="Username" type="text" id="username" required=""></div>
+                  <div class="input-div---brix"><input class="input---brix password-icon---brix w-input" maxlength="256" name="password" data-name="Password" placeholder="Password" type="password" id="password" required=""></div>
+                  <label id="remember-me-preview" class="w-checkbox checkbox-field---brix">
+                    <style>
+                      .w-checkbox-input--inputType-custom.w--redirected-checked {
+                        background-color: #3898ec;
+                        background-image: url("{% static 'base/custom-checkbox-checkmark.589d534424.svg' %}");
+                        background-position: 50%;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        border-color: #3898ec;
+                      }
+                    </style>
+                    <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div><input type="checkbox" id="Remember me" name="Remember-me" data-name="Remember me"  style="opacity:0;position:absolute;z-index:-1"><span for="Remember-me" class="w-form-label">Remember me</span>
+                  </label>
+                  <div class="create-account-box"><a href="{% url 'user:register' %}" class="create-new-account---brix">Don't have an account?&nbsp;Sign Up</a></div><input type="submit" data-wait="Please wait..." class="log-in-button---brix w-button" value="Login">    
+                  <a href="{% url 'user:recover' %}" class="forgot-password---brix">Forgot your password?</a>                        
+                  <div class="or-divider---brix">
+                    <div class="stroke---brix"></div>
+                    <div class="or-text-block---brix">or</div>
+                    <div class="stroke---brix"></div>
+                  </div> 
+                  <div class="social-buttons-wrap---brix"><a href="{% provider_login_url 'google' %}" class="social-button---brix w-inline-block"><img src="{% static 'user/login/google.svg'%}" loading="lazy" alt="" class="social-small-logo---brix">
+                      <div>Login with Google</div>
+                    </a></div>
+                  </form>               
+              </div>
+            </div>
+          </div>
+{% endblock %}
+

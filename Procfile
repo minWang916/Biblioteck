@@ -1,0 +1,1 @@
+web: gunicorn Bibliotech.wsgi --log-file -

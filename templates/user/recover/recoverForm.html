@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Reset password" %}{% endblock %}
+
+{% block content %}
+
+{% comment %} {% include 'base/message.html' %} {% endcomment %}
+{% include 'base/message.html' %}
+<div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div> 
+          <div class="container-default---login w-container">
+            <div data-w-id="bffbe75b-d95c-3992-bdd3-befc9d0bd453" style="opacity: 1;" class="mg-bottom-48px---login">
+              <div class="sign-in-form-block---brix w-form">
+
+                <form action="{% url 'user:recover' %}" id="wf-form-Sign-in-V1" name="wf-form-Sign-in-V1" data-name="Sign in V1" method="post" class="sign-in-form-v1---brix" data-wf-page-id="6631019727c76c1f85d4a18f" data-wf-element-id="07381e2a-d17a-38e9-de5c-b7fc4244450c" aria-label="Sign in V1">
+                  {% csrf_token %} 
+                   <div class="title-container---brix">
+                    <h2 class="heading-2---sign-in">{% trans "Forgot Password" %}</h2>
+                    <p class="paragraph-52">{% trans "Please fill your email to reset your password" %}</p>
+                  </div>
+                  <div class="input-div---brix">
+                    <input class="input---brix name-icon---brix w-input" maxlength="256" name="email" data-name="Email" placeholder="youremail@gmail.com" type="email" id="id_email" required="">
+                  </div>
+                  <input type="submit" data-wait="Please wait..." class="log-in-button---brix w-button" value="{% trans 'Reset password' %}">
+                </form>       
+
+              </div>
+            </div>
+          </div>
+     
+
+{% endblock %}
+
+
+{# This is used by django.contrib.auth #}
+
+
+
+{% comment %} <div class="container">
+  <h4>Account Recover View</h4>
+  <p>
+      {% blocktrans %}
+      Forgot your password? Enter your email in the form below and we'll send you instructions for creating a new one.
+      {% endblocktrans %}
+  </p>
+  <form method="post" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="{% trans 'Reset password' %}" />
+  </form>
+</div> {% endcomment %}

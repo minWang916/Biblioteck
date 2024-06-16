@@ -1,0 +1,145 @@
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.left {
+  flex: 1;
+  padding-right: 20px;
+}
+.right {
+  flex: 1;
+}
+.bookimg {
+  width: 400px;
+  height: 500px;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: block;
+}
+.reviews {
+  clear: both;
+  margin-top: 20px;
+}
+.review {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+}
+.review h3 {
+  margin-top: 0;
+}
+.rounded-sm {
+  border-radius: 0.25rem;
+}
+.mt-6 {
+  margin-top: 1.5rem;
+}
+.bg-gray-100 {
+  background-color: #f7fafc;
+}
+.submit {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: block;
+}
+.comment {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.username {
+  font-weight: bold;
+  color: #333;
+}
+.datetime {
+  position: right;
+  right: 10;
+  font-size: 12px;
+  color: #999;
+}
+.rating {
+  font-size: 12px;
+  color: #999;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 310px; /* Adjusted width */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  font-size: small; /* Adjust font size */
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-button {
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  padding: 0px 5px;
+}
+
+.dropdown-button:focus {
+  outline: none;
+}
+
+.down-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 2px;
+  pointer-events: none; /* This line makes the arrow area non-clickable */
+}
+
+/* Hide the text in the button */
+.dropdown-button span.text {
+  display: none;
+}
+
+#selectedOption {
+  width: 310px; /* Adjusted width */
+  font-style: italic; /* Make the font italic */
+  font-size: small; /* Adjust font size */
+}
+
+/* Style for container */
+.see-more-container {
+  margin-top: 10px; /* Adjust as needed */
+}

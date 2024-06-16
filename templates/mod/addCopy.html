@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'base/message.html' %}
+
+{% if form.errors %}
+    {% for field in form %}
+    {{field}}
+        {% for error in field.errors %}
+            <p> {{ error }} </p>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+<div class="main-section" style="padding-top: 3vw;">
+  <div class="container-default w-container">
+    <div class="block-sticky-top---main-contain">
+      <div id="w-node-_5b7b5ab1-6d00-c7e0-62e6-f29490555c22-9a24b53f" class="dashboard-main-content---user-profiles">
+        <div id="cards" class="pd-top-24px---activities">
+
+          <div class="card component-card card-one-line" style="max-width: 95vw;">
+            <div class="w-form">
+
+
+              <style>
+                .w-checkbox-input--inputType-custom.w--redirected-checked {
+                    background-color: #3898ec;
+                    background-image: url("{% static 'gallery/custom-checkbox-checkmark.589d534424.svg' %}");
+                    background-position: 50%;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    border-color: #3898ec;
+                }
+              </style>
+
+
+<form id="wf-form-signup" name="wf-form-signup" data-name="signup" method="post" action="{% url 'mod:addCopy' book.id %}" data-ms-form="profile" class="container_profile-form-2" data-wf-page-id="66304d01b2d8ae4b9a24b53f" data-wf-element-id="42ebedb0-94f6-ae4e-e956-e07ffc90504a">
+  {% csrf_token %}
+  <h1 class="h1_small">Add Copy</h1>
+  <div>Use the form below to add your copy of the book to your bookshelf. </div>
+  <div class="spacer_m"></div>
+  <div class="row">
+    <div class="column" style="width: 60%; display: inline-block; padding: auto;">
+      <div class="input-wrapper _15p-right" style="padding-top: 4vw;"><label for="First-Name-4" class="input-label">Title</label><h3 style="padding-left: 20px; padding-top: 10px;">{{book.title}}</h3></div>
+      <div class="input-wrapper"><label for="Author" class="input-label">Author</label><h4 style="padding-left: 20px; padding-top: 10px;">{{book.author}}</h4></div>
+    </div>
+    <div class="column" style="width: 30%; float: right; padding-right: 5%;">
+
+      {% if book.coverImage %}          
+        {% if book.manual == True  %} 
+        <img src="{{ book.coverImage.url }}" alt="" style="width: 100%; float: right;" />
+    
+        {% else %}   
+        <img src="{{ book.coverImage }}" alt="" style="width: 100%; float: right;" />
+    
+        {% endif %}                 
+      {% else %}   
+      <img src="/media/book/defaultCover.jpg" alt="" style="width: 100%40vw; float: right;" />         
+    
+      {% endif %}  
+    </div>
+  </div>
+  <div class="spacer_xs"></div>
+  <textarea class="input-2 w-input" name="note" id="note" placeholder="Write your note for this copy here."></textarea>
+  
+  <div class="padding-button-block" style="margin-top: 30px;">
+    <div class="submit-button-book"><input type="submit" data-wait="Please wait..." class="btn-primary---save w-button" value="Submit" /></div>
+  </div>
+</form>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

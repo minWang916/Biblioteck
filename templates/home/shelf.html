@@ -1,0 +1,273 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+{% load static %}
+
+
+<link href="{% static 'mod/webflow-style.css' %}"  rel="stylesheet" type="text/css" />
+<link href="{% static 'mod/webflow-style1.css' %}"  rel="stylesheet" type="text/css" />
+<div class="main-section---user-profile" style="padding-bottom: 5vw;">
+  <div class="container-default-5 w-container">
+    <div class="block-sticky-top---main-contain">
+      <div class="dashboard-main-content---user-profiles">
+
+        <div class="moderator-profile---card" style="max-width: 95vw;">
+          <div class="brix---container-default-11 w-container">
+            <div class="moderator-profile---main-block-copy">
+              <div class="brix---flex-vertical-center">
+                <h2>Bookshelf of</h2>
+                <div class="brix---mg-bottom-16px-11">
+                  <a href="#" class="brix---avatar-circle-8 w-inline-block">
+                  {% if ownerSocialAccount %}
+                  <img src="{{ ownerSocialAccount.get_avatar_url }}" alt="" sizes="(max-width: 479px) 160px, (max-width: 767px) 33vw, (max-width: 991px) 26vw, 240px"  class="brix---avatar-image-link-3" />
+                  {% else %}
+                    {% if mod.avatar %}
+                    
+                    <img src="/media/{{ mod.avatar }}" alt="" sizes="(max-width: 479px) 160px, (max-width: 767px) 33vw, (max-width: 991px) 26vw, 240px"  class="brix---avatar-image-link-3" />
+                  
+                    {% else %}
+          
+                    <img src="/media/user/defaultAvatar.jpg" alt="" sizes="(max-width: 479px) 160px, (max-width: 767px) 33vw, (max-width: 991px) 26vw, 240px"  class="brix---avatar-image-link-3" />
+                  
+                    {% endif %}
+                  {% endif %}
+                
+                </a></div>
+                <div class="brix---text-center-8"><a href="#" class="brix---text-decoration-none-3 w-inline-block">
+                    <div class="moderator---title-book">
+                      <h3 class="moderator-profile---name">{{mod.first_name}}</h3>
+                    </div>
+                  </a></div>
+              </div>
+              <div class="moderator-profile---block-text">
+                <div class="brix---color-neutral-815">
+                  <p class="moderator-profile---text-box"><strong>Phone</strong>: {{mod.phoneNum}}</p>
+                  <p class="moderator-profile---text-box"><strong>Email</strong>: {{mod.email}}</p>
+                  <p class="moderator-profile---text-box"><strong>Working hours</strong>: {{mod.availableWorkingHours}} </p>
+                  <p class="moderator-profile---text-box"><strong>Address</strong>: {{mod.address}}</p>
+                  <p class="moderator-profile---text-box-description"><strong>Desciption</strong>: {{mod.description}}</p>
+                  <p class="moderator-profile---text-box-description"><i>Owns <strong>{{copies|length}}</strong> copies on Bibliotech.</i></p>
+                  {% if user.role == 1 %}
+                  <div class="block-add-book"><a href="{% url 'mod:addBook' %}" class="brix---btn-primary-6 w-button">Add Book</a></div>
+                  {% else %}
+                  <div class="block-add-book---hidden"></div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="cards" class="pd-top-24px---activities"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .w-checkbox-input--inputType-custom.w--redirected-checked {
+      background-color: #3898ec;
+      background-image: url("{% static 'gallery/custom-checkbox-checkmark.589d534424.svg' %}");
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-color: #3898ec;
+  }
+</style>
+<div class="section cloneables-listing">
+  <div class="brix---section-4" style="padding-top: 5vw;">
+    <div class="brix---container-default-5 w-container">
+      <div class="form-block-2 w-form">
+        
+        <form action="{% url 'home:shelf' mod.id%}" id="email-form" name="email-form" method="get" data-wf-page-id="66585433712302d24ae55b9a" data-wf-element-id="85c93d83-b041-dcbc-9b08-13e044d497bb">
+          <div class="combo-filter-book">
+            <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block;">
+                <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                <input value="liteCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                <span for="category" class="checkbox-label w-form-label">Literature</span>
+            </label>
+            <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                <input value="socieCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                <span for="category" class="checkbox-label w-form-label">Social Science</span>
+            </label>
+            <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                <input value="naturCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                <span for="category" class="checkbox-label w-form-label">Nature</span>
+            </label>
+            <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                <input value="techCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                <span for="category" class="checkbox-label w-form-label">Technology</span>
+            </label>
+        </div>
+        <div class="combo-filter-book">
+            <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                <input value="poliCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                <span for="category" class="checkbox-label w-form-label">Political</span>
+            </label>
+            <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                <input value="romanCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                <span for="category" class="checkbox-label w-form-label">Romantic</span>
+            </label>
+            <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                <input value="enterCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                <span for="category" class="checkbox-label w-form-label">Entertainment</span>
+            </label>
+            <label id="remember-me-preview" class="w-checkbox checkbox-field---brix" style="display: inline-block; ;">
+                <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox---brix"></div>
+                <input value="otherCate" type="checkbox" id="category" name="category" data-name="History 2" style="opacity:0;position:absolute;z-index:-1" />
+                <span for="category" class="checkbox-label w-form-label">Others</span>
+            </label>
+        </div>
+          <div class="brix---mg-bottom-16px-7 w-form" style="margin-top: 3vw;">
+              <div class="brix---position-relative-2">
+                  <input class="search-box w-input" maxlength="256" name="book_search" data-name="Search Box" placeholder="Search book title, author and more..." type="text" id="Search-Box" />
+                  <button type="submit" class="brix---btn-circle-secondary-small w-inline-block">
+                    <img alt="Search - Elements Webflow Library - BRIX Templates" src="{% static 'gallery/line-rounded-search-dark-brix-templates.svg' %}" />
+                </button>
+                
+              </div>
+          </div>
+      </form>
+        
+        
+      </div>
+      <br><br><br>
+      <div class="w-layout-grid brix---grid-3-columns-3">
+        {% for copy in copies %}
+        <a id="w-node-_8d38f56c-7f89-ee87-4c5a-740504701bb3-4ae55b9a" 
+          {% if request.user.id == mod.id %}  
+            href="{% url 'mod:editCopy' copy.id%}"
+          {% else %}
+            href=""
+          {% endif %}
+          class="brix---product-card-wrapper-v1 w-inline-block" style="max-width: 30vw; position: relative;">
+          
+          {% if copy.status == 0 %}
+            <div style="position: absolute; z-index: 999; background-color: lightgray; left: 5px; top: 5px; padding: 10px; border-radius: 10px; border: solid black 1px;"></div>
+            
+          {% endif %}
+          {% if copy.status == 1 %}
+            <div style="position: absolute; z-index: 999; background-color: #00FF00; left: 5px; top: 5px; padding: 10px; border-radius: 10px; border: solid black 1px;"></div>
+            
+          {% endif %}
+          {% if copy.status == 2 %}
+            <div style="position: absolute; z-index: 999; background-color: red; left: 5px; top: 5px; padding: 10px; border-radius: 10px; border: solid black 1px;"></div>
+            
+          {% endif %}
+          {% if copy.status == 3 %}
+            <div style="position: absolute; z-index: 999; background-color: yellow; left: 5px; top: 5px; padding: 10px; border-radius: 10px; border: solid black 1px;"></div>
+            
+          {% endif %}
+          <div class="brix---product-card-image-inside-card">          
+            {% if copy.bookID.coverImage %}          
+              {% if copy.bookID.manual == True  %} 
+              <img src="{{ copy.bookID.coverImage.url }}" alt="" class="brix---product-card-image" />   
+              {% else %}   
+              <img src="{{ copy.bookID.coverImage }}" alt="" class="brix---product-card-image" />   
+              {% endif %}                 
+            {% else %}            
+              <img src="/media/book/defaultCover.jpg" alt="" class="brix---product-card-image" />
+            {% endif %}     
+          </div>
+          <div class="brix---product-card-content">
+            <div class="brix---mg-bottom-16px-5">
+              <div class="brix---color-neutral-809---book-name">
+                <div class="text-100---book-name bold color-neutral-800">{{copy.bookID.title}}</div>
+              </div>
+            </div>
+            <div class="brix---mg-bottom-24px-3">
+              <div class="brix---color-neutral-808---book-author">
+                <p class="brix---paragraph-default-5---book-author" style="line-height: 22px;">{{copy.bookID.author}}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+        </div>
+
+
+
+        {% if books.has_other_pages %}
+        <div class="block-of-next---previous-button">
+          {% if books.has_previous %}
+            <div class="previous-button-block">
+              <a href="?page={{ books.previous_page_number }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-primary w-inline-block">
+                <div class="flex-horizontal gap-column-4px">
+                  <div>Previous</div>
+                </div>
+              </a>
+            </div>
+          {% endif %}
+          
+          {% for i in books.paginator.page_range %}
+            {% if min <= books.number and books.number <= max and min <= i and i <= max %}
+                {% if books.number == i %}
+                <div class="one-button">
+                  <a href="?page={{ i }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-primary w-inline-block">
+                    <div class="flex-horizontal gap-column-4px">
+                      <div>{{ i }}</div>
+                    </div>
+                  </a>
+                </div>
+                {% else %}
+                <div class="second-button">
+                  <a href="?page={{ i }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-secondary w-inline-block">
+                    <div class="flex-horizontal gap-column-4px">
+                      <div>{{ i }}</div>
+                    </div>
+                  </a>
+                </div>
+                {% endif %}
+            {% else %}
+
+
+              {% if books.number == i %}
+                <div class="one-button">
+                  <a href="?page={{ i }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-primary w-inline-block">
+                    <div class="flex-horizontal gap-column-4px">
+                      <div>{{ i }}</div>
+                    </div>
+                  </a>
+                </div>
+              {% else %}
+                {% with sum_books_number=books.number|add:4 %}
+                {% if i >= books.number and i <= sum_books_number%}
+                <div class="second-button">
+                  <a href="?page={{ i }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-secondary w-inline-block">
+                    <div class="flex-horizontal gap-column-4px">
+                      <div>{{ i }}</div>
+                    </div>
+                  </a>
+                </div>
+                {% endif %}
+                {% endwith %}
+              {% endif %}
+
+
+            {% endif %}
+            {% endfor %}
+        
+            {% if books.has_next %}
+              <div class="next-button-block">
+                <a href="?page={{ books.next_page_number }}{% for key, value_list in request.GET.lists %}{% for value in value_list %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}{% endfor %}" class="btn-primary w-inline-block">
+                  <div class="flex-horizontal gap-column-4px">
+                    <div>Next</div>
+                  </div>
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

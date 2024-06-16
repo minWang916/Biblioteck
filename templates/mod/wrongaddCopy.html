@@ -1,0 +1,300 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<link href="{% static 'addCopy/css/webflow-style.css' %}"  rel="stylesheet" type="text/css" />
+
+<div class="main-section---user-profile">
+    <div class="container-default w-container">
+      <div class="block-sticky-top---main-contain---single-book">
+        <div class="w-layout-grid brix---grid-2-columns-gap-column-80px">
+          <div id="w-node-_5a17ac72-1850-1981-dc72-26f836fd84b8-51cf82b6" class="single-book---book-cover">
+            <div class="brix---mg-bottom-32px-3">
+              <div class="brix---image-wrapper-br-24px-shadow">
+                
+              
+                {% if book.coverImage %}          
+                      {% if book.manual == True  %} 
+                      <img src="{{ book.coverImage.url }}" alt="" class="brix---book-cover" />
+                
+                      {% else %}   
+                      <img src="{{ book.coverImage }}" alt="" class="brix---book-cover" />
+                
+                      {% endif %}                 
+                    {% else %}   
+                    <img src="/media/book/defaultCover.jpg" alt="" class="brix---book-cover" />         
+       
+                    {% endif %}  
+            
+            </div>
+            </div>
+          </div>
+          <div id="w-node-_743cabc5-f3ec-dfd2-c79f-f1cd26c67777-51cf82b6" class="block-text-book-detail">
+            <div class="brix---mg-bottom-8px-4">
+              <div class="brix---color-neutral-816">
+                <h3 class="single-book---book-title">{{book.title}}</h3>
+              </div>
+            </div>
+            <div class="brix---mg-bottom-40px-6">
+              <div class="brix---color-neutral-815">
+                <p class="single-book---author"><strong>Author</strong>: {{book.author}}</p>
+                <p class="single-book---author"><strong>Publisher</strong>: {{book.publisher}}</p>
+                <p class="single-book---publish-year"><strong>Publication</strong>: {{book.publication}}</p>
+                <p class="single-book---author"><strong>Language</strong>: {{book.language}}</p>
+                <p class="single-book---provider"><strong>Provider</strong>: <a href="{% url 'home:shelf' request.user.id%}">{{request.user.first_name}}</a> ({{copies | length}} copies available)</p>
+                <p class="single-book---author"><strong>Location</strong>: Ring road 4, Quarter 4, Thoi Hoa Ward, Ben Cat Town, Binh Duong Province</p>
+                <p class="single-book---description"><strong>Description</strong>: {{book.description}}</p>
+              </div>
+              <div class="block-of-edit---remove-book"><a href="{% url 'mod:editBook' book.id%}" class="brix---btn-primary-6 w-button">Modify Book</a><a href="{% url 'mod:deleteBook' book.id%}" class="brix---btn-secondary-6 w-button">Delete Book</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <footer class="brix---footer-wrapper-2">
+        <div class="brix---container-default-12 w-container">
+          <div class="brix---footer-top-small">
+            <div class="brix---inner-container-600px---center">
+              <div class="brix---text-center-9">
+                <div class="brix---mg-bottom-16px-12">
+                  <div class="brix---color-neutral-824">
+                    <h3 class="brix---heading-h3-size-8">Add new copy ID for this book</h3>
+                  </div>
+                </div>
+                <div class="brix---mg-bottom-40px-9 w-form">
+                  <form id="wf-form-BRIX---Footer-Subscribe---V7" name="wf-form-BRIX---Footer-Subscribe---V7" data-name="BRIX - Footer Subscribe - V7" method="get" data-wf-page-id="665c2b2bf8695c8551cf82b6" data-wf-element-id="395fdd31-1a6d-1204-4bae-6d7bcd5205a4">
+                    <div class="w-layout-grid brix---grid-subscribe-form-button-left"><input class="brix---input w-node-_395fdd31-1a6d-1204-4bae-6d7bcd5205a6-51cf82b6 w-input" maxlength="256" name="Add-Copy" data-name="Add Copy" placeholder="Enter the copy ID you want to add" type="text" id="Add-Copy" required="" /><input type="submit" data-wait="Please wait..." id="w-node-_395fdd31-1a6d-1204-4bae-6d7bcd5205a7-51cf82b6" class="brix---btn-primary-7 w-button" value="Add copy" /></div>
+                  </form>
+                  <div class="brix---success-message w-form-done">
+                    <div class="brix---success-message-horizontal"><img src="images/line-rounded-check-circle-white-brix-templates.svg" alt="Check - Elements Webflow Library - BRIX Templates" class="brix---icon-success-message-left-3" />
+                      <div>Thanks for joining our newsletter</div>
+                    </div>
+                  </div>
+                  <div class="brix---error-message-3 w-form-fail">
+                    <div>Oops! Something went wrong while submitting the form.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <div class="wrapper-center-home---moderator-single-book">
+        <div class="block-sticky-top---main-contain">
+          <div id="w-node-_8741ca46-d7db-6739-daca-146de98fe598-51cf82b6" class="dashboard-main-content---user-notification">
+            <div class="card">
+              <div id="cards" class="pd-top-24px---activities">
+                <div class="card overflow-hidden border-none">
+                  <div class="overflow-auto---book-id-copy">
+                    <div class="text-400 bold color-neutral-800 align-left">Book ID Copy Table</div>
+                    <div class="data-table-row-copy table-header">
+                      <div id="w-node-_0718fb25-a777-38ce-0ee5-0147859d786d-51cf82b6" class="text-50 bold color-neutral-700 self-central---book-copy-id">No</div>
+                      <div id="w-node-b632d7b0-3b2d-f6ba-c480-79d2f20c7f9f-51cf82b6" class="text-50 bold color-neutral-700 self-central---id-book-copy">ID</div>
+                      <div id="w-node-_0718fb25-a777-38ce-0ee5-0147859d786f-51cf82b6" class="text-50 bold color-neutral-700 self-central---borrower">Borrower</div>
+                      <div id="w-node-_0718fb25-a777-38ce-0ee5-0147859d7871-51cf82b6" class="text-50 bold color-neutral-700 self-central---time">Time</div>
+                      <div id="w-node-_0718fb25-a777-38ce-0ee5-0147859d7873-51cf82b6" class="text-50 bold color-neutral-700 self-central---status">Status<br /></div>
+                      <div id="w-node-_6bddf347-cbaa-c1ae-7a18-6e44f3312d75-51cf82b6" class="text-50 bold color-neutral-700 self-central---action">Action<br /></div>
+                    </div>
+                    <div class="rows">
+					{% for copy in copies %}
+                      <div class="data-table-row---book-id-copy">
+                        <div id="w-node-_0718fb25-a777-38ce-0ee5-0147859d787b-51cf82b6" class="text-100---n-o medium">{{ forloop.counter }}</div>
+                        <div id="w-node-_0718fb25-a777-38ce-0ee5-0147859d7879-51cf82b6" class="text-100---book-copy-id bold color-neutral-800">12342341254134</div>
+                        <div id="w-node-e2a5c096-31b9-ef3d-189f-1095015c2686-51cf82b6" class="text-100---borrower-users medium">Vietnamese -German University VGU</div>
+                        <div id="w-node-_0718fb25-a777-38ce-0ee5-0147859d787d-51cf82b6" class="text-100---time medium">01/01/24</div>
+                        <div id="w-node-_0718fb25-a777-38ce-0ee5-0147859d787f-51cf82b6" class="color-badge orange">Borrowed</div>
+                        <div class="close-icon-wrapper---book-id-copy">
+                          <div class="close-icon-line---book-id-copy first"></div>
+                          <div class="close-icon-line---book-id-copy second"></div>
+                        </div>
+                      </div>
+					{% endfor %}
+                      <div class="data-table-row---book-id-copy">
+                        <div id="w-node-_651b4447-b3f8-9b3d-f363-6f6b54c1a17e-51cf82b6" class="text-100---n-o medium">2</div>
+                        <div id="w-node-_651b4447-b3f8-9b3d-f363-6f6b54c1a180-51cf82b6" class="text-100---book-copy-id bold color-neutral-800">12342341254134</div>
+                        <div id="w-node-_651b4447-b3f8-9b3d-f363-6f6b54c1a182-51cf82b6" class="text-100---borrower-users medium">lcnguyencs</div>
+                        <div id="w-node-_651b4447-b3f8-9b3d-f363-6f6b54c1a184-51cf82b6" class="text-100---time medium">01/01/24</div>
+                        <div id="w-node-_651b4447-b3f8-9b3d-f363-6f6b54c1a186-51cf82b6" class="color-badge orange">Borrowed</div>
+                        <div class="close-icon-wrapper---book-id-copy">
+                          <div class="close-icon-line---book-id-copy first"></div>
+                          <div class="close-icon-line---book-id-copy second"></div>
+                        </div>
+                      </div>
+                      <div class="data-table-row---book-id-copy">
+                        <div id="w-node-_6d95391e-9016-990c-8193-e8cc3081dea7-51cf82b6" class="text-100---n-o medium">3</div>
+                        <div id="w-node-_6d95391e-9016-990c-8193-e8cc3081dea9-51cf82b6" class="text-100---book-copy-id bold color-neutral-800">12342341254134</div>
+                        <div id="w-node-_6d95391e-9016-990c-8193-e8cc3081deab-51cf82b6" class="text-100---borrower-users medium">#</div>
+                        <div id="w-node-_6d95391e-9016-990c-8193-e8cc3081dead-51cf82b6" class="text-100---time medium">#</div>
+                        <div id="w-node-_6d95391e-9016-990c-8193-e8cc3081deaf-51cf82b6" class="color-badge green">Available</div>
+                        <div id="w-node-_6cd7e32f-0ef3-dfce-828d-98d9d8b773db-51cf82b6" class="none-delete">#</div>
+                      </div>
+                      <div class="data-table-row---book-id-copy">
+                        <div id="w-node-_7dfdc617-d58c-3a7e-2968-68c2b71d363a-51cf82b6" class="text-100---n-o medium">4</div>
+                        <div id="w-node-_7dfdc617-d58c-3a7e-2968-68c2b71d363c-51cf82b6" class="text-100---book-copy-id bold color-neutral-800">12342341254134</div>
+                        <div id="w-node-_7dfdc617-d58c-3a7e-2968-68c2b71d363e-51cf82b6" class="text-100---borrower-users medium">#</div>
+                        <div id="w-node-_7dfdc617-d58c-3a7e-2968-68c2b71d3640-51cf82b6" class="text-100---time medium">#</div>
+                        <div id="w-node-_7dfdc617-d58c-3a7e-2968-68c2b71d3642-51cf82b6" class="color-badge green">Available</div>
+                        <div id="w-node-_7dfdc617-d58c-3a7e-2968-68c2b71d3644-51cf82b6" class="none-delete">#</div>
+                      </div>
+                      <div class="data-table-row---book-id-copy">
+                        <div id="w-node-_42a2554e-35ef-3ebe-4c9c-32cae1212d9d-51cf82b6" class="text-100---n-o medium">5</div>
+                        <div id="w-node-_42a2554e-35ef-3ebe-4c9c-32cae1212d9f-51cf82b6" class="text-100---book-copy-id bold color-neutral-800">12342341254134</div>
+                        <div id="w-node-_42a2554e-35ef-3ebe-4c9c-32cae1212da1-51cf82b6" class="text-100---borrower-users medium">#</div>
+                        <div id="w-node-_42a2554e-35ef-3ebe-4c9c-32cae1212da3-51cf82b6" class="text-100---time medium">#</div>
+                        <div id="w-node-_42a2554e-35ef-3ebe-4c9c-32cae1212da5-51cf82b6" class="color-badge green">Available</div>
+                        <div id="w-node-_42a2554e-35ef-3ebe-4c9c-32cae1212da7-51cf82b6" class="none-delete">#</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="block-pagniation">
+                    <div class="block-of-next---previous-button">
+                      <div class="previous-button-block"><a data-w-id="5a0bd496-dbdd-6d57-4a06-0716a768fb0e" href="#" class="btn-primary w-inline-block">
+                          <div class="flex-horizontal gap-column-4px">
+                            <div>Previous</div>
+                          </div>
+                        </a></div>
+                      <div class="one-button"><a data-w-id="5a0bd496-dbdd-6d57-4a06-0716a768fb15" href="#" class="btn-primary w-inline-block">
+                          <div class="flex-horizontal gap-column-4px">
+                            <div>1</div>
+                          </div>
+                        </a></div>
+                      <div class="second-button"><a data-w-id="5a0bd496-dbdd-6d57-4a06-0716a768fb1c" href="#" class="btn-secondary w-inline-block">
+                          <div class="flex-horizontal gap-column-4px">
+                            <div>2</div>
+                          </div>
+                        </a></div>
+                      <div class="third-button"><a data-w-id="5a0bd496-dbdd-6d57-4a06-0716a768fb23" href="#" class="btn-secondary w-inline-block">
+                          <div class="flex-horizontal gap-column-4px">
+                            <div>3</div>
+                          </div>
+                        </a></div>
+                      <div class="fourth-button"><a data-w-id="5a0bd496-dbdd-6d57-4a06-0716a768fb2a" href="#" class="btn-secondary w-inline-block">
+                          <div class="flex-horizontal gap-column-4px">
+                            <div>4</div>
+                          </div>
+                        </a></div>
+                      <div class="fifth-button"><a data-w-id="5a0bd496-dbdd-6d57-4a06-0716a768fb31" href="#" class="btn-secondary w-inline-block">
+                          <div class="flex-horizontal gap-column-4px">
+                            <div>5</div>
+                          </div>
+                        </a></div>
+                      <div class="next-button-block"><a data-w-id="5a0bd496-dbdd-6d57-4a06-0716a768fb38" href="#" class="btn-primary w-inline-block">
+                          <div class="flex-horizontal gap-column-4px">
+                            <div>   Next   </div>
+                          </div>
+                        </a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <h2 class="text-500 bold mg-bottom-12px">Reviews </h2>
+    </div>
+  </div>
+  <div class="brix---container-default-3 w-container">
+    <div class="single-book---review-rating">
+      <div data-delay="4000" data-animation="slide" class="brix---slider-wrapper-2 w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="true" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
+        <div class="brix---slider-mask-width-390px w-slider-mask">
+          <div class="brix---slide-item-mg-2---5-stars w-slide">
+            <div class="brix---card-testimonial-v13">
+              <div class="brix---flex-horizontal">
+                <div>
+                  <div class="brix---mg-bottom-8px">
+                    <div class="brix---color-neutral-804">
+                      <h3 class="brix---heading-h4-size">John Carter</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="brix---mg-bottom-24px-2">
+                <div class="brix---color-neutral-805">
+                  <p class="brix---paragraph-default-3">Truyen rat y nghia, nen doc</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="brix---slide-item-mg-2---4-stars w-slide">
+            <div class="brix---card-testimonial-v13">
+              <div class="brix---flex-horizontal">
+                <div>
+                  <div class="brix---mg-bottom-8px">
+                    <div class="brix---color-neutral-804">
+                      <h3 class="single-book---name-comment">Sophie Moore</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="brix---mg-bottom-24px-2">
+                <div class="brix---color-neutral-805">
+                  <p class="single-book---block-comment-text">nhu cac</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="brix---slide-item-mg-2---3-stars w-slide">
+            <div class="brix---card-testimonial-v13">
+              <div class="brix---flex-horizontal">
+                <div>
+                  <div class="brix---mg-bottom-8px">
+                    <div class="brix---color-neutral-804">
+                      <h3 class="single-book---name-comment">Matt Cannon</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="brix---mg-bottom-24px-2">
+                <div class="brix---color-neutral-805">
+                  <p class="single-book---block-comment-text">ko nen xem</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="brix---slide-item-mg-2---2-stars w-slide">
+            <div class="brix---card-testimonial-v13">
+              <div class="brix---flex-horizontal">
+                <div>
+                  <div class="brix---mg-bottom-8px">
+                    <div class="brix---color-neutral-804">
+                      <h3 class="single-book---name-comment">Andy Smith</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="brix---mg-bottom-24px-2">
+                <div class="brix---color-neutral-805">
+                  <p class="single-book---block-comment-text">“Lorem ipsum dolor sit amet conse ctetur adipiscing lectus a nunc mauris scelerisque sed egestas pharetraol quis pharetra arcu pharetra blandit.”</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="brix---slide-item-mg-2---1-star w-slide">
+            <div class="brix---card-testimonial-v13">
+              <div class="brix---flex-horizontal">
+                <div>
+                  <div class="brix---mg-bottom-8px">
+                    <div class="brix---color-neutral-804">
+                      <h3 class="single-book---name-comment">John Carter</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="brix---mg-bottom-24px-2">
+                <div class="brix---color-neutral-805">
+                  <p class="single-book---block-comment-text">“Lorem ipsum dolor sit amet conse ctetur adipiscing lectus a nunc mauris scelerisque sed egestas pharetraol quis pharetra arcu pharetra blandit.”</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="brix---btn-slider-arrow-left---testimonial-v12 w-slider-arrow-left"><img src="{% static 'addCopy/images/left-arrow-line-icon-elements-brix-templates.svg' %}"  loading="lazy" alt="Icon - Elements Webflow Library - BRIX Templates" /></div>
+        <div class="brix---btn-slider-arrow-right---testimonial-v12 w-slider-arrow-right"><img src="{% static 'addCopy/images/right-arrow-line-icon-elements-brix-templates.svg' %}"  loading="lazy" alt="Icon - Elements Webflow Library - BRIX Templates" /></div>
+        <div class="brix---hidden-desktop-2 w-slider-nav w-round"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

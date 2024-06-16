@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+{% include 'base/message.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Password reset complete" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <p>
+        {% trans "Your password has been reset!" %}
+        <a href="{% url 'user:login' %}">{% blocktrans %}You may now log in{% endblocktrans %}.</a>
+    </p>
+</div>
+{% endblock %}

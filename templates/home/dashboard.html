@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+<div style="margin: 30px 10vw;">
+  <h3 class="title hero-v3 home-title text-span home-text-span">Dashboard</h3>
+  <div style="background-color: white; padding: 20px; border-radius: 20px; border: solid 1px; margin-bottom: 30px;">
+    <i><img src="/static/base/logo1.svg" alt="Bibliotech" width="100vw"> is a library management system with an aim to bring people closer by encouraging book borrowing from and to Bibliotech users.</i>
+    <div style="margin-top: 20px; text-align: center;">
+      <div style="display: inline-block; margin: auto; width: 16vw;">{{books|length}} <i class="fa fa-book" aria-hidden="true"></i></div>
+      <div style="display: inline-block; margin: auto; width: 16vw;">{{users|length}} <i class="fa-solid fa-user"></i></div>
+      <div style="display: inline-block; margin: auto; width: 16vw;">{{copies.count}} <i class="fa-solid fa-copy"></i></div>
+      <div style="display: inline-block; margin: auto; width: 16vw;">{{borrowances.count}} <i class="fa-solid fa-check"></i></div>
+    </div>
+  </div>
+
+  <div style="background-color: white; padding: 20px; border-radius: 20px; border: solid 1px; margin-bottom: 30px;">
+    <h3>Most borrowances</h3>
+    <div class="row" style='display: flex;'>
+      <div class="column" style="float: left;  width: 50%;">
+        <h4>Most borrowed books</h4>
+        {% for book in books_borrow %}
+          <div style="padding-right: 25px;">
+            <span style="display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 80%;">
+              <a href="{% url 'home:book' book.id %}" style="text-decoration: none;">{{book.title}}</a>
+            </span><span style="float: right;">: {{book.number_borrow}}</span> <br>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="column" style="float: left;  width: 50%;">
+        <h4>Most active borrowers</h4>
+        {% for user in users_borrow %}
+          <div>
+            <span style="display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 80%;">
+              <a href="{% url 'user:wall' user.id %}" style="text-decoration: none;">{{user.name}}</a>
+            </span><span style="float: right;">: {{user.number_borrow}}</span> <br>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  <div style="background-color: white; padding: 20px; border-radius: 20px; border: solid 1px; margin-bottom: 30px;">
+    <h3>Most copies</h3>
+    <div class="row" style='display: flex;'>
+      <div class="column" style="float: left;  width: 50%;">
+        <h4>Book with most copies</h4>
+        {% for book in books_copy %}
+          <div style="padding-right: 25px;">
+            <span style="display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 80%;">
+              <a href="{% url 'home:book' book.id %}" style="text-decoration: none;">{{book.title}}</a>
+            </span><span style="float: right;">: {{book.number_copy}}</span> <br>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="column" style="float: left;  width: 50%;">
+        <h4>Users with most copies</h4>
+        {% for user in users_copy %}
+          <div>
+            <span style="display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 80%;">
+              <a href="{% url 'user:wall' user.id %}" style="text-decoration: none;">{{user.name}}</a>
+            </span><span style="float: right;">: {{user.number_copy}}</span> <br>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+

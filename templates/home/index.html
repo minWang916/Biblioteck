@@ -1,0 +1,202 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+<div class="section cloneables-listing" style="padding-bottom: 0px;">
+    <div class="component-section hero-v3 preview-page">
+      <div class="container-default-3" style="width: 50vw; display: inline-block;">
+        <div class="hero-v3-wrapper">
+          <div class="split-content hero-v3-left---brix" >
+            <div class="subtitle hero-v3">Random book for you</div>
+            <h4 class="home-title">
+              <span class="text-span home-text-span" style="text-overflow: ellipsis; overflow: hidden; width: 35vw; white-space: nowrap; padding-bottom: 50px; line-height: 50px;">{{ books.random.title }}</span>
+              <i class="author-text">{{ books.random.author }}</i>
+            </h4>
+            <div class="multiple-buttons"><a href="/gallery/bookid={{books.random.id}}/detail" target="_blank" class="button-primary w-button">Read now</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="split-content hero-v3-right" style="display: inline-block; width: 40vw">
+        {% if books.random.coverImage %}
+          {% if books.random.manual == True  %}
+          <img src="/media/{{ books.random.coverImage }}" alt="imaging" sizes="(max-width: 767px) 100vw, (max-width: 991px) 451.7749938964844px, (max-width: 1439px) 46vw, (max-width: 1919px) 47vw, 20vw" class="hero-image hero-v3 full-display" style="display: inline-block;" />
+          {% else %}
+          <img src="{{ books.random.coverImage }}" alt="imaging" sizes="(max-width: 767px) 100vw, (max-width: 991px) 451.7749938964844px, (max-width: 1439px) 46vw, (max-width: 1919px) 47vw, 20vw" class="hero-image hero-v3 full-display" style="display: inline-block;"/>
+          {% endif %}
+        {% else %}
+          <img src="/media/book/defaultCover.png" alt="imaging" sizes="(max-width: 767px) 100vw, (max-width: 991px) 451.7749938964844px, (max-width: 1439px) 46vw, (max-width: 1919px) 47vw, 20vw" class="hero-image hero-v3 full-display" />
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="section cloneables-listing home-book-listings" style="padding-bottom: 50px;">
+    <div class="container-default-2 w-container">
+      <div class="cloneable-container-default-2" style="padding-top: 3vw">
+        <h1 class="heading-3 section-title">Explore our library</h1>
+        <div class="sliding-box-2">
+          <div class="container-default---brix adjust-container-max-w">
+            <div class="testimonial-wrapper---brix">
+              <div class="top-content---brix testimonial-v1--brix">
+                <div class="subtitle---brix">— Book showcase</div>
+                <h2 class="title-2 testimonial---brix">Literature Books</h2>
+              </div>
+              <div data-delay="4000" data-animation="slide" class="slider---brix testimonial-v1---brix w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="true" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
+                <div class="mask---brix testimonial-v1---brix w-slider-mask">
+                  {% for item in books.literature %}
+                  <div class="book-slide-item book-carousel first-item-carousel w-slide">
+                    <div class="book-card testimonial-v1---brix first---brix" style="min-height: 270px;">
+                      <div class="split-content---brix testimonials-client-info---brix">
+                        <div class="grid-card-wrapper">
+                          <div class="image-wrapper---brix testimonial-v1---brix">
+                            {% if item.coverImage %}
+                              {% if item.manual == True  %}
+                              <img src="/media/{{ item.coverImage }}" alt="imaging" style="width: 175px; height: 250px;"/>
+                              {% else %}
+                              <img src="{{ item.coverImage }}" alt="imaging" style="width: 175px; height: 250px;"/>
+                              {% endif %}
+                            {% else %}
+                              <img src="/media/book/defaultCover.png" alt="imaging" style="width: 175px; height: 250px;"/>
+                            {% endif %}
+                          </div>
+                          <div class="split-content---brix avatar-content---brix">
+                            <h2 class="title-2 avatar-name-v1---brix">{% if item.title|length > 25 %}{{ item.title|truncatechars:25 }}{% else %}{{ item.title }}{% endif %}</h2>
+                            <div class="text-block-6">by {{ item.author }}</div>
+                            <p class="paragraph---brix testimonial-v1---brix">
+                            </p>
+                            <div class="multiple-buttons"><a href="/gallery/bookid={{item.id}}/detail" class="btn-primary-4 w-inline-block">
+                                <div class="flex-horizontal gap-column-4px">
+                                  <div>See more</div>
+                                </div>
+                              </a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="slider-arrow---brix small---brix left---brix w-slider-arrow-left">
+                  <div class="image---brix slider-arrow-icon---brix w-icon-slider-left"></div>
+                </div>
+                <div class="slider-arrow---brix small---brix right---brix w-slider-arrow-right">
+                  <div class="image---brix slider-arrow-icon---brix w-icon-slider-right"></div>
+                </div>
+                <div class="display-none w-slider-nav w-round"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sliding-box-2">
+          <div class="container-default---brix adjust-container-max-w">
+            <div class="testimonial-wrapper---brix">
+              <div class="top-content---brix testimonial-v1--brix">
+                <div class="subtitle---brix">— Book showcase</div>
+                <h2 class="title-2 testimonial---brix">Trending Books</h2>
+              </div>
+              <div data-delay="4000" data-animation="slide" class="slider---brix testimonial-v1---brix w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="true" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
+                <div class="mask---brix testimonial-v1---brix w-slider-mask">
+                  {% for item in books.trending %}
+                  <div class="book-slide-item book-carousel first-item-carousel w-slide">
+                    <div class="book-card testimonial-v1---brix first---brix" style="min-height: 270px;">
+                      <div class="split-content---brix testimonials-client-info---brix">
+                        <div class="grid-card-wrapper">
+                          <div class="image-wrapper---brix testimonial-v1---brix">
+                            {% if item.coverImage %}
+                              {% if item.manual == True  %}
+                              <img src="/media/{{ item.coverImage }}" alt="imaging" style="width: 175px; height: 250px;"/>
+                              {% else %}
+                              <img src="{{ item.coverImage }}" alt="imaging" style="width: 175px; height: 250px;"/>
+                              {% endif %}
+                            {% else %}
+                              <img src="/media/book/defaultCover.png" alt="imaging" style="width: 175px; height: 250px;"/>
+                            {% endif %}
+                          </div>
+                          <div class="split-content---brix avatar-content---brix">
+                            <h2 class="title-2 avatar-name-v1---brix">{{ item.title|truncatechars:25 }}</h2>
+                            <div class="text-block-6">by {{ item.author }}</div>
+                            <p class="paragraph---brix testimonial-v1---brix">
+
+                            </p>
+                            <div class="multiple-buttons"><a href="/gallery/bookid={{item.id}}/detail" class="btn-primary-4 w-inline-block">
+                                <div class="flex-horizontal gap-column-4px">
+                                  <div>See more</div>
+                                </div>
+                              </a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="slider-arrow---brix small---brix left---brix w-slider-arrow-left">
+                  <div class="image---brix slider-arrow-icon---brix w-icon-slider-left"></div>
+                </div>
+                <div class="slider-arrow---brix small---brix right---brix w-slider-arrow-right">
+                  <div class="image---brix slider-arrow-icon---brix w-icon-slider-right"></div>
+                </div>
+                <div class="display-none w-slider-nav w-round"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sliding-box-2">
+          <div class="container-default---brix adjust-container-max-w">
+            <div class="testimonial-wrapper---brix">
+              <div class="top-content---brix testimonial-v1--brix">
+                <div class="subtitle---brix">— Book showcase</div>
+                <h2 class="title-2 testimonial---brix">All-time favourites</h2>
+              </div>
+              <div data-delay="4000" data-animation="slide" class="slider---brix testimonial-v1---brix w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="true" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
+                <div class="mask---brix testimonial-v1---brix w-slider-mask">
+                  {% for item in books.favorite %}
+                  <div class="book-slide-item book-carousel first-item-carousel w-slide">
+                    <div class="book-card testimonial-v1---brix first---brix" style="min-height: 270px;">
+                      <div class="split-content---brix testimonials-client-info---brix">
+                        <div class="grid-card-wrapper">
+                          <div class="image-wrapper---brix testimonial-v1---brix">
+                            {% if item.coverImage %}
+                              {% if item.manual == True  %}
+                              <img src="/media/{{ item.coverImage }}" alt="imaging" style="width: 175px; height: 250px;"/>
+                              {% else %}
+                              <img src="{{ item.coverImage }}" alt="imaging" style="width: 175px; height: 250px;"/>
+                              {% endif %}
+                            {% else %}
+                              <img src="/media/book/defaultCover.png" alt="imaging" style="width: 175px; height: 250px;"/>
+                            {% endif %}
+                          </div>
+                          <div class="split-content---brix avatar-content---brix">
+                            <h2 class="title-2 avatar-name-v1---brix">{{ item.title|truncatechars:25 }}</h2>
+                            <div class="text-block-6">by {{ item.author }}</div>
+                            <div class="multiple-buttons"><a href="/gallery/bookid={{item.id}}/detail" class="btn-primary-4 w-inline-block">
+                                <div class="flex-horizontal gap-column-4px">
+                                  <div>See more</div>
+                                </div>
+                              </a></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="slider-arrow---brix small---brix left---brix w-slider-arrow-left">
+                  <div class="image---brix slider-arrow-icon---brix w-icon-slider-left"></div>
+                </div>
+                <div class="slider-arrow---brix small---brix right---brix w-slider-arrow-right">
+                  <div class="image---brix slider-arrow-icon---brix w-icon-slider-right"></div>
+                </div>
+                <div class="display-none w-slider-nav w-round"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+{% endblock %}
+

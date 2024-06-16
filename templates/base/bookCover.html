@@ -1,0 +1,9 @@
+{% if item.coverImage %}
+  {% if item.manual == True  %}
+  <img src="/media/{{ item.coverImage }}" width="100px" height="140px" alt="image">
+  {% else %}
+  <img src="{{ item.coverImage }}" width="100px" height="140px" alt="image">
+  {% endif %}
+{% else %}
+  <img src="/media/book/defaultCover.jpg" width="150px" alt="image">
+{% endif %}

@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+{% include 'base/message.html' %}
+{% load static %}
+
+<div class="container">
+  <h3>Mod Application Review View</h3>
+  {% include "control/menu.html" %}
+  <hr>
+  {% for book in books %}
+    <div class="book-info m-2" style="border: solid 1px black;">
+      Title: {{ book.title }} <br>
+      Author: {{ book.author }} <br>
+      ISBN: {{ book.codeISBN }} <br>
+      Publisher: {{ book.publisher }} <br>
+      <form class="m-2" action="{% url 'control:bookDecide' 'approve' book.id %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Approve">
+      </form>
+      <form class="m-2" action="{% url 'control:bookDecide' 'decline' book.id %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Decline">
+      </form>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+{% include 'base/message.html' %}
+
+<div class="container-default---login w-container">
+  <div data-w-id="bffbe75b-d95c-3992-bdd3-befc9d0bd453" style="opacity: 1;" class="mg-bottom-48px---login">
+    <div class="sign-in-form-block---brix w-form">
+
+
+      <form action = "{% url 'mod:modApply' %}" id="wf-form-Sign-in-V1" name="wf-form-Sign-in-V1" data-name="Sign in V1" method="post" class="sign-in-form-v1---brix" data-wf-page-id="6635af3e5935deccf38319cc" data-wf-element-id="07381e2a-d17a-38e9-de5c-b7fc4244450c" aria-label="Sign in V1">  
+        {% csrf_token %}     
+        <div class="title-container---brix">
+          <h2 class="heading-2---sign-in"> Book Moderator Application</h2>
+          <p class="paragraph-52">Please fill your info to start your application</p>
+        </div>           
+     
+        <div class="input-div---brix">
+          <label for="phone" class="field-label---brix-2">Phone Number</label>
+          {% if request.user.phoneNum %}
+          <input class="input---brix phone-icon---brix w-input" maxlength="256" name="phone" data-name="Phone" placeholder="" type="text" id="phone" required="" value="{{request.user.phoneNum}}">
+          {% else %}
+          <input class="input---brix phone-icon---brix w-input" maxlength="256" name="phone" data-name="Phone" placeholder="Please provide your phone number" type="text" id="phone" required="" >
+          {% endif %}
+      </div>
+      <div class="input-div---brix">
+          <label for="address" class="field-label---brix-2">Address</label>
+          {% if request.user.address %}
+          <input class="input---brix address-icon---brix w-input" maxlength="256" name="address" data-name="Address" value="{{request.user.address}}" placeholder="your address" type="text" id="address" required="">
+          {% else %}
+          <input class="input---brix address-icon---brix w-input" maxlength="256" name="address" data-name="Address" placeholder="Please provide your address" type="text" id="address" required="">
+          {% endif %}
+      </div>
+      <div class="input-div---brix">
+          <label for="working_hours" class="field-label---brix-2">Available Working Hours (Write as a sentence)</label>
+          {% if request.user.availableWorkingHours %}
+          <input class="input---brix working-hours-icon---brix w-input" maxlength="256" name="working_hours" data-name="Working Hours" value="{{request.user.availableWorkingHours}}" type="text" id="working_hours" required="">
+          {% else %}
+          <input class="input---brix working-hours-icon---brix w-input" maxlength="256" name="working_hours" data-name="Working Hours" placeholder="Please provide your available hours" type="text" id="working_hours" required="">
+          {% endif %}
+      </div>
+      <div class="input-div---brix-3">
+          <label for="Desciptions" class="field-label---brix-2">Descriptions (Optional)</label>
+          {% if request.user.description %}
+          <textarea  placeholder="Let's introduce yourself to other users :)" maxlength="5000" id="Desciptions" name="description" data-name="Desciptions" class="text-area---brix w-input">{{request.user.description}}</textarea>
+          {% else %}
+          <textarea placeholder="Let's introduce yourself to other users :)" maxlength="5000" id="Desciptions" name="description" data-name="Desciptions" class="text-area---brix w-input"></textarea>
+          {% endif %}
+          
+      </div>
+      
+      
+                  <br><br>
+                  <input type="submit" data-wait="Please wait..." class="log-in-button---brix w-button" value="Submit" />
+        
+        
+          
+        </form>
+
+        
+        
+
+
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
