@@ -69,12 +69,71 @@ python manage.py runserver
 ```
 
 ## File Structure
+The following outlines is the hierarchical structure of our project, generalizing the organization of directories and files. This structure is designed to facilitate ease of development, maintenance, and deployment.
+```
+📦 vgupe2024_team2
+├─ .document
+│  └─ diagrams
+├─ Bibliotech
+│  └─ _pycache_
+control
+│  ├─ _pycache_
+│  └─ migrations
+├─ home
+│  ├─ _pycache_
+│  └─ migrations
+├─ database
+├─ media
+│  ├─ book
+│  └─ user
+moderator
+│  ├─ forms.py
+│  ├─ urls.py
+│  ├─ views.py
+│  ├─ admin.py
+│  ├─ apps.py
+│  ├─ tests.py
+│  └─ _init_.py
+├─ static
+│  ├─ admin
+│  ├─ base
+│  ├─ home
+│  ├─ mod
+│  └─ user
+├─ templates
+│  ├─ base
+│  ├─ control
+│  ├─ home
+│  ├─ mod
+│  ├─ socialaccount
+│  ├─ temp
+│  └─ user
+├─ user
+│  ├─ forms.py
+│  ├─ urls.py
+│  ├─ views.py
+│  ├─ admin.py
+│  ├─ apps.py
+│  ├─ tests.py
+│  ├─ tokens.py
+│  └─ _init_.py
+├─ Dockerfile
+├─ docker-compose.yaml
+├─ manage.py
+├─ requirements.txt
+├─ db.sqlite3
+└─ README.md
+```
 
+### System Requirement
+Our project will focus on the following set of requirements while designing the Online Library Management:
 
-## Design and Architectures
-
-### System requirement
-
+1. Any library user should be able to search books by their title, author, subject category as well by the publication date.
+2. Each book will have a unique identification number and other details which will help to physically locate the book.
+3. There could be more than one copy of a book, and library users should be able to check-out and reserve any copy.
+4. The admin should be able to retrieve information like who took a particular book or what are the books checked-out by a specific library user.
+5. There should be a maximum limit (14) on how many days a user can keep a book.
+6. The user will receive an email informing them when a book has been approved by the admin to be checked out.
 -----
 
 ### Use Case Diagram
@@ -85,43 +144,44 @@ Our team have four actors in our system:
 - Guest: The guest can access the webpage to view its content such as latest news from the library, the regulation or the FAQ. 
 
 <a href=".document/diagrams/usecase/usecase_guest.png">Use case diagram for guest</a>
-
-<a href=".document/diagrams/usecase/usecase_other.png">Use case diagram for user, moderator and admin</a>
+<a href=".document/diagrams/usecase/usecase_other.png">Use case diagram for user</a>
+<a href=".document/diagrams/usecase/usecase_other.png">Use case diagram for moderator and admin</a>
 
 -----
 
 ### Sequence Diagram
+Here are the following sequence diagrams to illustrate various functions within our project: 
 
-<a href=".document/diagrams/sequence/sequence_guest.png">Sequence diagram for guest functions: contact, search book, view books, read news</a>
-
+<a href=".document/diagrams/sequence/sequence_guest.png">Sequence diagram for guest functions: contact, search book, view books, read FAQs</a>
 <a href=".document/diagrams/sequence/sequence_register.png">Sequence diagram for "register" function</a>
-
 <a href=".document/diagrams/sequence/sequence_login.jpg">Sequence diagram for "login" function</a>
-
 <a href=".document/diagrams/sequence/sequence_addbook.png">Sequence diagram for "add book" function</a>
-
 <a href=".document/diagrams/sequence/Review.svg">Sequence diagram for "user's book review" function</a>
 
 -----
 
-### E-R Class Diagram
+### E-R Diagram
+Below is the E-R diagram to demonstrate about our database throughout the project:
 
-<img src=".document/ER-diagram.png" alt="Alt text" title="usecase diagram">
+<a href=".document/ER-diagram.png">E-R Diagram</a>
 
 -----
 
 ### Deployment Diagram
 
-<img src=".document/diagrams/deployment/deployment.jpg" alt="Alt text" title="deployment diagram">
+<a href=".document/diagrams/deployment/deployment.jpg">Deployment Diagram</a>
 
-<!-- <img src=".document/flowChart.png" alt="Alt text" title="flow chart">
-<img src=".document/usecase_guest.png" alt="Alt text" title="usecase diagram" width=400px>
-<img src=".document/usecase_other.png" alt="Alt text" title="usecase diagram"> -->
-
-## Prototypes
-Prototyped UI
-
-Deployment here
+## UI Display
+<table>
+  <tr>
+    <td><img src=".document/photos/home.png" alt="Image 1" width="520" />Home</td>
+    <td><img src=".document/photos/dashboard.png" alt="Image 2" width="600" />Dashboard</td>
+  </tr>
+    <tr>
+    <td><img src=".document/photos/gallery.png" alt="Image 3" width="500" />Gallery</td>
+    <td><img src=".document/photos/myborrowings.png" alt="Image 4" width="620" />My Borrowings</td>
+    </tr>
+</table>
 
 ## Credits
 List all the tasks and history of contribution (if possible)

@@ -1,16 +1,16 @@
 {% autoescape off %}
-Hi {{borrowance.userID.first_name }},
+Dear {{borrowance.userID.first_name }},
 {% if action == "Approve" %}
 The provider {{borrowance.copyID.userID.first_name }} has accepted your borrow request for the item {{borrowance.copyID.bookID.title}}.
-You can pick up the book from {{borrowance.copyID.userID.first_name }} by:
+You can pick up the book from {{borrowance.copyID.userID.first_name}} by:
 - Location: {{borrowance.copyID.userID.address}}
 - Time: {{borrowance.copyID.userID.availableWorkingHours}}
 Please return the book no later 14 days after today, which is before {{borrowance.expiredDate}}.
-Thank you for using Biblioteck. We hope you enjoy the book!
+Thank you for using Bibliotech. We hope you enjoy the book!
 {% else %}
 Unfortunately, the provider {{borrowance.copyID.userID.first_name }} has declined your borrow request for the item {{borrowance.copyID.bookID.title}}.
 We are sorry for the inconvenience. You can try to borrow another book from our library at http://{{ domain }}{% url 'home:gallery' %}.
 {% endif %}
 Regards,
-Biblioteck Team
+Bibliotech Team
 {% endautoescape %}

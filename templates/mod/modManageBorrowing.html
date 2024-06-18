@@ -224,7 +224,7 @@
                                         <img id="w-node-efffa969-b9d8-24ea-5808-5bad2ac6775b-125b4e44" loading="lazy" alt="" src="/media/book/defaultCover.jpg" class="book-images-size" />
                                       {% endif %} 
                                       <div id="w-node-_548fcd18-4f65-a100-5312-df1f0e9e7b79-6eb9ba07" class="text-100---book-title bold color-neutral-800">{{borrowance.copyID.bookID.title}}</div>
-                                      <div class="text-100---provider medium">{{borrowance.copyID.userID.first_name}}</div>
+                                      <div class="text-100---provider medium">{{borrowance.userID.first_name}}</div>
                                       <div id="w-node-_548fcd18-4f65-a100-5312-df1f0e9e7b7d-6eb9ba07" class="text-100---time medium">{{borrowance.borrowDate}}</div>
                                       <div id="w-node-_5876c51e-7b29-357b-ec91-eb17eda4b428-6eb9ba07" class="combo-button">
                                         <form action="{% url 'mod:modManage_post' borrowance.id%}" method="post">
