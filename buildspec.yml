@@ -22,7 +22,6 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - chmod 777 db.sqlite3
 artifacts:
   files:
     - '**/*'
