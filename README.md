@@ -11,6 +11,8 @@
 | [Phan Tâm Như](https://github.com/nhuhuynh1508) | 10421122 |
 | [Nguyễn Minh Anh](https://github.com/sumirez) | 10421068 |
 
+***Link to the report:*** [Overleaf LaTeX report](https://www.overleaf.com/read/vnwzxfkpcztz#cff629)
+
 
 ## Project Description
 ### Overview
