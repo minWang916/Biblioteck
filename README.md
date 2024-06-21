@@ -4,8 +4,8 @@
 ## Team members
 | Full Name    | Student's ID  |
 | ------------ | ------------- |
-| [Huỳnh Lê An Phú](https://github.com/TheFabulousP) | 10421100 |
 | [Đỗ Minh Quang](https://github.com/minWang916) | 10421051 |
+| [Huỳnh Lê An Phú](https://github.com/TheFabulousP) | 10421100 |
 | [Lê Công Nguyên](https://github.com/lcnguyencs) | 10421043 |
 | [Dương Thiên Hương](https://github.com/dxd1019) | 10421019 |
 | [Phan Tâm Như](https://github.com/nhuhuynh1508) | 10421122 |
