@@ -19,7 +19,7 @@ class indexView(View):
         "cssFiles": [],  # Initializes an empty list for CSS file paths
         "socialAccount": getSocialAccount(request),  # Retrieves social account details based on the request
         "books": {
-            "random": Book.objects.get(id=random.randint(1, 178)),  # Retrieves a random Book object within the ID range 1 to 178
+            "random": Book.objects.get(id=random.randint(10, 98)),  # Retrieves a random Book object within the ID range 1 to 178
             "literature": random.sample(list(Book.objects.filter(liteCate=1)), 6),  # Retrieves 6 random Book objects filtered by liteCate = 1
             "trending": random.sample(list(Book.objects.all()), 6),  # Retrieves 6 random Book objects from all available books
             "favorite": random.sample(list(Book.objects.all()), 6),  # Retrieves 6 random Book objects from all available books
