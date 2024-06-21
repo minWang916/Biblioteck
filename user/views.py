@@ -105,15 +105,13 @@ class registerView(View):
         usernames = list(User.objects.values_list('username', flat=True))
         emails = list(User.objects.values_list('email', flat=True))
         
-        # Hash the usernames and emails
-        usernames_hashed = [hash_string(username) for username in usernames]
-        emails_hashed = [hash_string(email) for email in emails]
+
         
         # Prepare the context for rendering the registration page
         context = {
             "web": "Register",
-            "usernames": usernames_hashed,
-            "emails": emails_hashed,
+            "usernames": usernames,
+            "emails": emails,
         }
         # Render the registration page with the context
         return render(request, "user/register.html", context)

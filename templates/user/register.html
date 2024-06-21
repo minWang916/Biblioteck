@@ -89,14 +89,7 @@
             </form>
 
             <script>
-              async function hashString(inputString) {
-                const encoder = new TextEncoder();
-                const data = encoder.encode(inputString);
-                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-                const hashArray = Array.from(new Uint8Array(hashBuffer));
-                const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-                return hashHex;
-              }
+              
 
               var userOK = false
               var passOK = false
@@ -156,8 +149,8 @@
                 const emailElements = document.querySelectorAll('#emails .email')
                 const emails = Array.from(emailElements).map((el) => el.textContent)
 
-                const hashedEmail = await hashString(email);
-                const isUnique = !emails.includes(hashedEmail);
+                
+                const isUnique = !emails.includes(email);
               
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
                 emailOK = emailRegex.test(email) && email.length > 0 && isUnique
@@ -187,8 +180,8 @@
                 const usernameElements = document.querySelectorAll('#usernames .username')
                 const usernames = Array.from(usernameElements).map((el) => el.textContent)
 
-                const hashedUsername = await hashString(username)
-                const isUnique = !usernames.includes(hashedUsername)
+              
+                const isUnique = !usernames.includes(username)
               
                 const validCharsRegex = /^[a-zA-Z0-9]*$/
               

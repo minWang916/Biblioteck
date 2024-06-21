@@ -132,6 +132,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # "default": {
+    #     "ENGINE": "mssql",
+    #     "NAME": "biblioteck",
+    #     "USER": "taikhoan916",
+    #     "PASSWORD": "matkhau916",
+    #     "HOST": "database-2.czq2w4u4mkn0.ap-southeast-2.rds.amazonaws.com",
+    #     "PORT": "",
+    #     "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
+    #                 'extra_params': 'Encrypt=no;TrustServerCertificate=yes',
+    #     },
+    # },
 }
 
 
