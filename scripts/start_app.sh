@@ -8,8 +8,9 @@ python manage.py collectstatic
 sudo service gunicorn restart
 sudo service nginx restart
 
-sudo chmod 777 /home/ubuntu/Biblioteck/db.sqlite3
+
 sudo chown -R www-data:www-data /home/ubuntu/Biblioteck
+sudo chmod a+rwx /home/ubuntu/Biblioteck
 #sudo tail -f /var/log/nginx/error.log
 #sudo systemctl reload nginx
 #sudo tail -f /var/log/nginx/error.log
